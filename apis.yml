@@ -1,0 +1,214 @@
+aid: estuary
+url: https://raw.githubusercontent.com/api-evangelist/estuary/refs/heads/main/apis.yml
+name: Estuary
+kind: company
+description: Estuary builds Estuary Flow, a real-time data movement platform for
+  streaming ETL and change data capture (CDC). Flow captures data from databases,
+  warehouses, and SaaS systems into durable collections and materializes those
+  collections back out to destinations. The Flow control plane exposes a
+  Supabase/PostgREST-based REST API (Bearer refresh/access tokens) covering
+  captures, materializations, collections, catalog drafts and publications,
+  connectors, and tenants/billing, while the data plane is driven declaratively
+  via the flowctl CLI and a Gitops model.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Data Integration
+- Streaming ETL
+- Change Data Capture
+- CDC
+- Real-Time Data
+- Data Pipelines
+created: '2026-07-01'
+modified: '2026-07-01'
+specificationVersion: '0.19'
+apis:
+- aid: estuary:estuary-captures-api
+  name: Estuary Captures API
+  tags:
+  - Captures
+  - Ingestion
+  - CDC
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/concepts/captures/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/concepts/captures/
+    type: Documentation
+  - url: https://docs.estuary.dev/concepts/
+    type: APIReference
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Manage capture task specifications that continuously ingest data
+    from source databases, warehouses, and SaaS systems into Flow collections,
+    modeled as live_specs of catalogType 'capture' and materialized through the
+    draft and publication workflow.
+- aid: estuary:estuary-materializations-api
+  name: Estuary Materializations API
+  tags:
+  - Materializations
+  - Destinations
+  - Sync
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/concepts/materialization/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/concepts/materialization/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Manage materialization task specifications that push Flow collections
+    out to destination systems (databases, warehouses, queues), modeled as
+    live_specs of catalogType 'materialization' and published from drafts.
+- aid: estuary:estuary-collections-api
+  name: Estuary Collections API
+  tags:
+  - Collections
+  - Schemas
+  - Storage
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/concepts/collections/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/concepts/collections/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Read and manage collections - durable, schematized, real-time
+    datasets of JSON documents keyed and stored in cloud object storage - exposed
+    as live_specs of catalogType 'collection' with their JSON Schema and key.
+- aid: estuary:estuary-catalog-drafts-api
+  name: Estuary Catalog Drafts API
+  tags:
+  - Drafts
+  - Catalog
+  - Specs
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/concepts/catalogs/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/concepts/catalogs/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Create and edit drafts and their draft_specs - the staging area
+    where proposed changes to captures, materializations, and collections are
+    assembled and tested before being published into the live catalog.
+- aid: estuary:estuary-publications-api
+  name: Estuary Publications API
+  tags:
+  - Publications
+  - Publish
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/concepts/catalogs/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/concepts/catalogs/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Submit a draft for publication, validating and promoting its specs
+    into the running data plane as live_specs; asynchronous jobs recorded in the
+    publications table with a job status polled until completion.
+- aid: estuary:estuary-connectors-api
+  name: Estuary Connectors API
+  tags:
+  - Connectors
+  - Catalog
+  - Discovery
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/concepts/connectors/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/concepts/connectors/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Browse the catalog of available capture and materialization
+    connectors and their tagged image versions (connectors, connector_tags), and
+    run schema discovery against a configured connector via the discovers surface.
+- aid: estuary:estuary-tenants-billing-api
+  name: Estuary Tenants & Billing API
+  tags:
+  - Tenants
+  - Billing
+  - Usage
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/getting-started/pricing/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/getting-started/pricing/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Read tenant configuration, catalog usage statistics (catalog_stats
+    - bytes and docs captured/materialized), and monthly billing estimates via
+    the billing_report_202308 RPC used to meter data-movement GB and connector
+    instances.
+- aid: estuary:estuary-auth-tokens-api
+  name: Estuary Auth & Tokens API
+  tags:
+  - Authentication
+  - Tokens
+  - Access Control
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.estuary.dev/reference/authentication/
+  baseURL: https://api.estuary.dev
+  properties:
+  - url: https://docs.estuary.dev/reference/authentication/
+    type: Documentation
+  - url: openapi/estuary-openapi.yml
+    type: OpenAPI
+  - url: collections/estuary.postman_collection.json
+    type: PostmanCollection
+  - url: collections/estuary.opencollection.json
+    type: OpenCollection
+  description: Manage long-lived refresh_tokens and exchange a refresh token for a
+    short-lived access token via the generate_access_token RPC; inspect roles and
+    capability grants (user_grants, role_grants) that authorize catalog access.
+common:
+- type: GitHubOrganization
+  url: https://github.com/estuary
+- type: LinkedIn
+  url: https://www.linkedin.com/company/estuary-tech
+- type: Website
+  url: https://estuary.dev/
+- type: Documentation
+  url: https://docs.estuary.dev
+- type: Plans
+  url: plans/estuary-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/estuary-rate-limits.yml
+- type: FinOps
+  url: finops/estuary-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

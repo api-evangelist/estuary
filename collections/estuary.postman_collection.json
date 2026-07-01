@@ -1,0 +1,770 @@
+{
+  "item": [
+    {
+      "id": "77713be6-2643-41bd-afc9-610d32b88afe",
+      "name": "Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75324fb7-9585-482b-be9f-34f56b48c0b0",
+          "name": "Exchange a refresh token for a short-lived access token.",
+          "request": {
+            "name": "Exchange a refresh token for a short-lived access token.",
+            "description": {
+              "content": "PostgREST RPC that exchanges a refresh token id + secret for a signed access token used as the Authorization Bearer credential.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "rpc",
+                "generate_access_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": {\n    \"id\": \"<string>\",\n    \"secret\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "884c1b24-6b56-4aad-923d-4746871f80a1",
+          "name": "List refresh tokens.",
+          "request": {
+            "name": "List refresh tokens.",
+            "description": {
+              "content": "List the long-lived refresh tokens owned by the authenticated user.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "refresh_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "a0559a58-5080-4448-8e11-6bcdeaa4c54b",
+          "name": "Create a refresh token.",
+          "request": {
+            "name": "Create a refresh token.",
+            "description": {
+              "content": "Create a new long-lived refresh token; the secret is returned once.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "refresh_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detail\": \"<string>\",\n  \"multi_use\": true,\n  \"valid_for\": \"90 days\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "fe0d62b1-06df-4311-a30c-59d84695f7b0",
+          "name": "Revoke a refresh token.",
+          "request": {
+            "name": "Revoke a refresh token.",
+            "description": {
+              "content": "Revoke a refresh token.",
+              "type": "text/plain"
+            },
+            "method": "DELETE",
+            "auth": null,
+            "url": {
+              "path": [
+                "refresh_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "eq.<id>"
+                }
+              ],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "4436e8ef-5604-4de0-8587-7e19ebf1c0d4",
+          "name": "List user grants.",
+          "request": {
+            "name": "List user grants.",
+            "description": {
+              "content": "List capability grants from users to catalog prefixes.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "user_grants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "1d147098-e8df-4328-8877-25d2e99c42ea",
+          "name": "List role grants.",
+          "request": {
+            "name": "List role grants.",
+            "description": {
+              "content": "List capability grants between catalog prefixes (roles).",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "role_grants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "ce6fba0c-efe9-4a52-967c-f0f94cec412a",
+      "name": "Live Specs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b5c870d9-ccbe-4fdf-998c-ab185023b4ab",
+          "name": "List live specifications (captures, materializations, collections).",
+          "request": {
+            "name": "List live specifications (captures, materializations, collections).",
+            "description": {
+              "content": "List published, running catalog entities. Filter by spec_type and catalog_name using PostgREST operators.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "live_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "spec_type",
+                  "value": "eq.capture"
+                }
+              ],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "919e4961-5ab8-4025-95e2-7773f68ce387",
+          "name": "Get a single live specification.",
+          "request": {
+            "name": "Get a single live specification.",
+            "description": {
+              "content": "Get a single live spec by id.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "live_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "eq.<id>"
+                }
+              ],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "81ecfb5f-7f3c-4296-8a93-ea5d02f11889",
+          "name": "List data-flow lineage edges.",
+          "request": {
+            "name": "List data-flow lineage edges.",
+            "description": {
+              "content": "List source-to-target edges between live specs.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "live_spec_flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "736ea1a0-20d2-4092-ba92-fba3a841f5bf",
+      "name": "Drafts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "727afaaf-dbe8-484b-b73f-d4082cf0e79e",
+          "name": "List drafts.",
+          "request": {
+            "name": "List drafts.",
+            "description": {
+              "content": "List drafts owned by the user.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "drafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "321bf929-23d5-4235-80f5-1b36c546c91b",
+          "name": "Create a draft.",
+          "request": {
+            "name": "Create a draft.",
+            "description": {
+              "content": "Create a new empty draft.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "drafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "8c79c269-fdf4-4161-b378-c84ad39e495c",
+          "name": "Delete a draft.",
+          "request": {
+            "name": "Delete a draft.",
+            "description": {
+              "content": "Delete a draft and its draft specs.",
+              "type": "text/plain"
+            },
+            "method": "DELETE",
+            "auth": null,
+            "url": {
+              "path": [
+                "drafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "eq.<id>"
+                }
+              ],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "4c5a3fec-c5e5-4c25-8fa4-175fa1c150ab",
+          "name": "List draft specs.",
+          "request": {
+            "name": "List draft specs.",
+            "description": {
+              "content": "List the capture/materialization/collection specs staged within a draft.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "draft_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "draft_id",
+                  "value": "eq.<draft_id>"
+                }
+              ],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "a860e987-8e53-4ba3-ae50-1aecf79df2ed",
+          "name": "Upsert a draft spec.",
+          "request": {
+            "name": "Upsert a draft spec.",
+            "description": {
+              "content": "Add or replace a spec in a draft. Send Prefer: resolution=merge-duplicates to update in place.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "draft_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"draft_id\": \"<string>\",\n  \"catalog_name\": \"acmeCo/source\",\n  \"spec_type\": \"capture\",\n  \"spec\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "f1aa708b-54ff-4dbb-901e-a4689903e7b1",
+      "name": "Publications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d989dc9a-e439-4f62-97fa-49eb919ac946",
+          "name": "List publications.",
+          "request": {
+            "name": "List publications.",
+            "description": {
+              "content": "List publication jobs and their status.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "publications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "23873128-6f4f-4700-b8d7-13bed3f6970f",
+          "name": "Publish a draft.",
+          "request": {
+            "name": "Publish a draft.",
+            "description": {
+              "content": "Enqueue an asynchronous publication of a draft into the running data plane; poll until job_status.type is success.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "publications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"draft_id\": \"<string>\",\n  \"dry_run\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "304a8c93-3ad6-4ed0-a317-1c5f93ecdf9c",
+      "name": "Connectors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b55fb08-2e6d-49bc-8124-a2b91ddbc01c",
+          "name": "List connectors.",
+          "request": {
+            "name": "List connectors.",
+            "description": {
+              "content": "List available capture and materialization connectors.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "connectors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "79b7484f-091d-4bac-a4a2-1353fa5b54d0",
+          "name": "List connector tags.",
+          "request": {
+            "name": "List connector tags.",
+            "description": {
+              "content": "List tagged image versions of connectors and their endpoint/resource spec schemas.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "connector_tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "0de1dff5-0039-46cb-8bee-7feed4a4521f",
+          "name": "Run schema discovery.",
+          "request": {
+            "name": "Run schema discovery.",
+            "description": {
+              "content": "Enqueue a discovery job to produce recommended bindings and collection schemas for a capture.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "discovers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector_tag_id\": \"<string>\",\n  \"capture_name\": \"acmeCo/source\",\n  \"endpoint_config\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "eefecdd7-c78b-4ddb-8d6e-29388c724a9b",
+      "name": "Tenants & Billing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4208d047-15cc-44ca-928e-bc2d14ec3a12",
+          "name": "List tenants.",
+          "request": {
+            "name": "List tenants.",
+            "description": {
+              "content": "List tenants (billing/ownership prefixes) the user can access.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "49037173-1a29-4428-8da9-e263f61766f2",
+          "name": "Read catalog usage statistics.",
+          "request": {
+            "name": "Read catalog usage statistics.",
+            "description": {
+              "content": "Read bytes and docs captured/materialized per catalog entity and grain.",
+              "type": "text/plain"
+            },
+            "method": "GET",
+            "auth": null,
+            "url": {
+              "path": [
+                "catalog_stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "grain",
+                  "value": "eq.monthly"
+                }
+              ],
+              "variable": []
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "cf7c3978-4be6-4b1b-98fb-f006382aa0f7",
+          "name": "Compute a monthly billing report.",
+          "request": {
+            "name": "Compute a monthly billing report.",
+            "description": {
+              "content": "RPC returning data-movement GB, connector-instance line items, and total for a tenant and billed month.",
+              "type": "text/plain"
+            },
+            "method": "POST",
+            "auth": null,
+            "url": {
+              "path": [
+                "rpc",
+                "billing_report_202308"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billed_prefix\": \"acmeCo/\",\n  \"billed_month\": \"2026-07-01\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fc11afc5-5461-41ad-bf2a-3d8eb35fbdf3",
+    "name": "Estuary Flow Control Plane API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative collection of the Estuary Flow control plane (Supabase/PostgREST) API.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

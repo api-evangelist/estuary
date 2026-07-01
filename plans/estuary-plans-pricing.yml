@@ -1,0 +1,132 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Estuary
+providerId: estuary
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: true
+tags:
+- Data Integration
+- Streaming ETL
+- Change Data Capture
+- CDC
+- Real-Time Data
+- Data Pipelines
+- Plans
+description: >-
+  Estuary Flow uses a two-part, usage-based pricing model: a per-GB charge for
+  data moved into and out of Flow, plus a flat monthly charge per active
+  connector instance. A perpetual Free tier covers small workloads. The Cloud
+  plan is self-serve (card or invoice) and metered; Enterprise adds
+  volume-based discounts, private deployment, and negotiated terms.
+notes: >-
+  Representative rates as published on the Estuary pricing page; verify current
+  per-GB and per-connector rates and Free-tier limits at reconciliation.
+sources:
+- https://estuary.dev/pricing/
+- https://docs.estuary.dev/getting-started/pricing/
+plans:
+- id: estuary-free
+  name: Free
+  type: free
+  description: >-
+    Perpetual free tier for small pipelines and evaluation - up to 10 GB/month
+    of data movement across up to 2 concurrent connector instances.
+  entries:
+  - label: Data Movement
+    name: free_data
+    type: quota
+    metric: gigabytes
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.00 up to 10 GB/month
+    userMultiplied: false
+  - label: Connector Instances
+    name: free_connectors
+    type: quota
+    metric: connectors
+    limit: 2
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.00 for up to 2 concurrent connectors
+    userMultiplied: false
+  elements:
+  - name: Captures
+  - name: Materializations
+  - name: Collections
+  - name: Community Support
+- id: estuary-cloud
+  name: Cloud
+  type: usage
+  description: >-
+    Self-serve, usage-based plan billed monthly by data volume moved plus a
+    flat rate per active connector instance. Pay by card or 30-day invoice;
+    30-day free trial available.
+  entries:
+  - label: Data Movement
+    name: data_moved
+    type: usage
+    metric: gigabytes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.50 per GB moved (in and out; source and target counted once)
+    userMultiplied: false
+  - label: Connector Instances (first 6)
+    name: connectors_base
+    type: recurring
+    metric: connectors
+    limit: 6
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $100 per connector instance / month
+    userMultiplied: false
+  - label: Connector Instances (additional)
+    name: connectors_additional
+    type: recurring
+    metric: connectors
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $50 per additional connector instance / month (prorated)
+    userMultiplied: false
+  elements:
+  - name: Captures
+  - name: Materializations
+  - name: Collections
+  - name: Change Data Capture
+  - name: Schema Discovery
+  - name: Email Support
+- id: estuary-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Volume-based discounts, scaled pricing, private/BYOC deployment options,
+    SSO, and dedicated support under a negotiated contract. Contact Estuary
+    sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Volume-Based Discounts
+  - name: Private / BYOC Deployment
+  - name: SSO and SLAs
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

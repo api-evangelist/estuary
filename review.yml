@@ -1,0 +1,89 @@
+aid: estuary
+name: Estuary
+review:
+  question: Does Estuary Flow expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-01'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Estuary Flow moves data in real time, but its public-facing control-plane
+    API is a synchronous REST surface (Supabase/PostgREST + GoTrue). The
+    real-time streaming happens inside the data plane between capture,
+    collection, and materialization tasks (a journal/broker model driven by
+    flowctl and Gitops), and that streaming is not surfaced to API consumers
+    as a public WebSocket or SSE endpoint. No AsyncAPI document was authored
+    because no consumer-facing event-stream transport is documented.
+findings:
+  summary: |
+    Estuary does not publish a documented public WebSocket API. Consumers
+    interact with Estuary Flow through (1) the REST control plane at
+    https://api.estuary.dev, a Supabase deployment exposing PostgREST tables
+    and RPCs for drafts, publications, live_specs, connectors, tenants,
+    catalog_stats, and refresh/access tokens; (2) the flowctl CLI, which wraps
+    that same control-plane API using a Gitops draft-then-publish workflow; and
+    (3) the dashboard web app at https://dashboard.estuary.dev. The actual
+    real-time data movement is a server-to-server concern of the data plane and
+    is not offered to API consumers as a ws:// or wss:// streaming endpoint.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.estuary.dev
+      documented: true
+      note: Supabase/PostgREST control plane; Authorization Bearer access token from generate_access_token.
+    - protocol: CLI
+      scheme: https
+      note: flowctl authenticates with a refresh token (FLOW_AUTH_TOKEN) and drives the same REST control plane.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No consumer-facing WebSocket endpoint is documented for the control plane or the data plane.
+  authentication:
+    model: Bearer access token exchanged from a long-lived refresh token
+    refreshTokenEnv: FLOW_AUTH_TOKEN
+    tokenExchangeRpc: POST https://api.estuary.dev/rpc/generate_access_token
+    note: Access tokens are short-lived and must be re-issued; refresh tokens are long-lived and revocable.
+  endpointsConfirmedRest:
+    - POST   https://api.estuary.dev/rpc/generate_access_token
+    - GET    https://api.estuary.dev/refresh_tokens
+    - POST   https://api.estuary.dev/refresh_tokens
+    - DELETE https://api.estuary.dev/refresh_tokens?id=eq.{id}
+    - GET    https://api.estuary.dev/live_specs
+    - GET    https://api.estuary.dev/live_spec_flows
+    - GET    https://api.estuary.dev/drafts
+    - POST   https://api.estuary.dev/drafts
+    - GET    https://api.estuary.dev/draft_specs
+    - POST   https://api.estuary.dev/draft_specs
+    - GET    https://api.estuary.dev/publications
+    - POST   https://api.estuary.dev/publications
+    - POST   https://api.estuary.dev/discovers
+    - GET    https://api.estuary.dev/connectors
+    - GET    https://api.estuary.dev/connector_tags
+    - GET    https://api.estuary.dev/tenants
+    - GET    https://api.estuary.dev/catalog_stats
+    - GET    https://api.estuary.dev/user_grants
+    - GET    https://api.estuary.dev/role_grants
+    - POST   https://api.estuary.dev/rpc/billing_report_202308
+sources:
+  - url: https://docs.estuary.dev/concepts/
+    type: Documentation
+    note: Describes the control plane (Supabase/PostgREST/GoTrue) and the draft-then-publish workflow.
+  - url: https://docs.estuary.dev/reference/authentication/
+    type: Documentation
+    note: Refresh tokens and short-lived access tokens; dashboard/CLI login; no WebSocket mentioned.
+  - url: https://docs.estuary.dev/guides/flowctl/ci-cd/
+    type: Documentation
+    note: flowctl uses FLOW_AUTH_TOKEN (refresh token) against the REST control plane for CI/CD.
+  - url: https://docs.estuary.dev/getting-started/pricing/
+    type: Documentation
+    note: Usage-based per-GB data movement plus per-connector-instance billing.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No consumer-facing WebSocket or SSE transport is documented, so no
+    AsyncAPI document was authored. The catalog models the REST control-plane
+    surfaces (captures, materializations, collections, drafts, publications,
+    connectors, tenants/billing, auth/tokens) against base URL
+    https://api.estuary.dev with OpenAPI and collection artifacts.

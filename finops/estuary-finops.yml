@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Estuary
+providerId: estuary
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: true
+tags:
+- Data Integration
+- Streaming ETL
+- Change Data Capture
+- CDC
+- Real-Time Data
+- Data Pipelines
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Estuary Flow spend. Estuary bills two usage dimensions: the
+  volume of data moved through Flow, metered in GB at a per-GB rate, and the
+  number of active connector instances, charged as a flat monthly rate per
+  instance (with a lower rate above the first six). A perpetual Free tier
+  covers 10 GB/month and 2 connectors. Because source and target data is
+  counted once, fan-out to additional destinations does not multiply the
+  data-movement charge.
+notes: >-
+  Per-GB and per-connector rates are subject to change; verify against the
+  Estuary pricing page and the tenant billing report during reconciliation.
+sources:
+- https://estuary.dev/pricing/
+- https://docs.estuary.dev/getting-started/pricing/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Estuary
+serviceCategory: Analytics
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Estuary Flow
+  ServiceCategory: Analytics
+  ProviderName: Estuary
+  PublisherName: Estuary
+  InvoiceIssuerName: Estuary
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: data_moved_gb
+  description: Gigabytes of data moved into and out of Flow, billed per GB (source and target counted once).
+  unit: gigabytes
+  aggregation: sum
+  dimensions:
+  - tenant
+  - catalog_name
+  - task_type
+- name: connector_instances
+  description: Active capture/materialization connector instances, billed at a flat monthly rate each (first 6 vs. additional).
+  unit: instances
+  aggregation: max
+  dimensions:
+  - tenant
+  - task_type
+- name: docs_processed
+  description: Document counts captured and materialized per catalog entity (from catalog_stats), used for visibility not direct billing.
+  unit: documents
+  aggregation: sum
+  dimensions:
+  - tenant
+  - catalog_name
+principles:
+- name: Visibility
+  description: Pull catalog_stats and the tenant billing_report to see per-catalog GB moved and connector-instance line items.
+- name: Allocation
+  description: Organize captures, collections, and materializations under tenant/team catalog prefixes to map spend to cost centers.
+- name: Optimization
+  description: Consolidate destinations to exploit once-counted source data, retire idle connector instances, and stay under Free-tier limits where possible.
+- name: Accountability
+  description: Assign owners per catalog prefix and review monthly GB-moved and connector-instance charges against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

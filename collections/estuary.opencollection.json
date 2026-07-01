@@ -1,0 +1,366 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Exchange a refresh token for a short-lived access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/rpc/generate_access_token",
+            "body": {
+              "type": "json",
+              "data": "{\"refresh_token\":{\"id\":\"\",\"secret\":\"\"}}"
+            }
+          },
+          "docs": "PostgREST RPC that exchanges a refresh token id + secret for a signed access token used as the Authorization Bearer credential."
+        },
+        {
+          "info": {
+            "name": "List refresh tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/refresh_tokens"
+          },
+          "docs": "List the long-lived refresh tokens owned by the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a refresh token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/refresh_tokens",
+            "body": {
+              "type": "json",
+              "data": "{\"detail\":\"\",\"multi_use\":true,\"valid_for\":\"90 days\"}"
+            }
+          },
+          "docs": "Create a new long-lived refresh token; the secret is returned once."
+        },
+        {
+          "info": {
+            "name": "Revoke a refresh token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.estuary.dev/refresh_tokens?id=eq.:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The refresh token id to revoke."
+              }
+            ]
+          },
+          "docs": "Revoke a refresh token."
+        },
+        {
+          "info": {
+            "name": "List user grants.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/user_grants"
+          },
+          "docs": "List capability grants from users to catalog prefixes."
+        },
+        {
+          "info": {
+            "name": "List role grants.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/role_grants"
+          },
+          "docs": "List capability grants between catalog prefixes (roles)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Live Specs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List live specifications (captures, materializations, collections).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/live_specs?spec_type=eq.capture"
+          },
+          "docs": "List published, running catalog entities. Filter by spec_type (capture, materialization, collection, test) and catalog_name using PostgREST operators."
+        },
+        {
+          "info": {
+            "name": "Get a single live specification.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/live_specs?id=eq.:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The live spec flowid."
+              }
+            ]
+          },
+          "docs": "Get a single live spec by id."
+        },
+        {
+          "info": {
+            "name": "List data-flow lineage edges.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/live_spec_flows"
+          },
+          "docs": "List source-to-target edges between live specs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Drafts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List drafts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/drafts"
+          },
+          "docs": "List drafts owned by the user."
+        },
+        {
+          "info": {
+            "name": "Create a draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/drafts",
+            "body": {
+              "type": "json",
+              "data": "{\"detail\":\"\"}"
+            }
+          },
+          "docs": "Create a new empty draft."
+        },
+        {
+          "info": {
+            "name": "Delete a draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.estuary.dev/drafts?id=eq.:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The draft id to delete."
+              }
+            ]
+          },
+          "docs": "Delete a draft and its draft specs."
+        },
+        {
+          "info": {
+            "name": "List draft specs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/draft_specs?draft_id=eq.:draft_id",
+            "params": [
+              {
+                "name": "draft_id",
+                "value": "",
+                "type": "path",
+                "description": "The parent draft id."
+              }
+            ]
+          },
+          "docs": "List the capture/materialization/collection specs staged within a draft."
+        },
+        {
+          "info": {
+            "name": "Upsert a draft spec.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/draft_specs",
+            "body": {
+              "type": "json",
+              "data": "{\"draft_id\":\"\",\"catalog_name\":\"acmeCo/source\",\"spec_type\":\"capture\",\"spec\":{}}"
+            }
+          },
+          "docs": "Add or replace a spec in a draft. Send Prefer: resolution=merge-duplicates to update in place."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Publications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List publications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/publications"
+          },
+          "docs": "List publication jobs and their status."
+        },
+        {
+          "info": {
+            "name": "Publish a draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/publications",
+            "body": {
+              "type": "json",
+              "data": "{\"draft_id\":\"\",\"dry_run\":false}"
+            }
+          },
+          "docs": "Enqueue an asynchronous publication of a draft into the running data plane; poll the created row until job_status.type is success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List connectors.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/connectors"
+          },
+          "docs": "List available capture and materialization connectors."
+        },
+        {
+          "info": {
+            "name": "List connector tags.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/connector_tags"
+          },
+          "docs": "List tagged image versions of connectors and their endpoint/resource spec schemas."
+        },
+        {
+          "info": {
+            "name": "Run schema discovery.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/discovers",
+            "body": {
+              "type": "json",
+              "data": "{\"connector_tag_id\":\"\",\"capture_name\":\"acmeCo/source\",\"endpoint_config\":{}}"
+            }
+          },
+          "docs": "Enqueue a discovery job to produce recommended bindings and collection schemas for a capture."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tenants & Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tenants.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/tenants"
+          },
+          "docs": "List tenants (billing/ownership prefixes) the user can access."
+        },
+        {
+          "info": {
+            "name": "Read catalog usage statistics.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/catalog_stats?grain=eq.monthly"
+          },
+          "docs": "Read bytes and docs captured/materialized per catalog entity and grain."
+        },
+        {
+          "info": {
+            "name": "Compute a monthly billing report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/rpc/billing_report_202308",
+            "body": {
+              "type": "json",
+              "data": "{\"billed_prefix\":\"acmeCo/\",\"billed_month\":\"2026-07-01\"}"
+            }
+          },
+          "docs": "RPC returning data-movement GB, connector-instance line items, and total for a tenant and billed month."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

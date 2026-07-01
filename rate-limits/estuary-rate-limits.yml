@@ -1,0 +1,72 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Estuary
+providerId: estuary
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: false
+tags:
+- Data Integration
+- Streaming ETL
+- Change Data Capture
+- CDC
+- Real-Time Data
+- Data Pipelines
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Estuary Flow control plane is a Supabase/PostgREST deployment; Estuary
+  does not publish explicit numeric request-per-minute limits for the
+  control-plane REST API. Practical constraints are shaped by access-token
+  expiry, PostgREST result paging, and per-tenant catalog quotas on the number
+  of tasks and collections rather than by an HTTP call-rate ceiling. The data
+  plane itself is governed by tenant task/collection quotas and connector
+  instance counts, not by API request rate.
+notes: >-
+  No documented per-minute control-plane rate limits were found. Verify tenant
+  task/collection quotas and any gateway throttling in the dashboard at
+  reconciliation; PostgREST enforces a default row limit on unbounded queries.
+sources:
+- https://docs.estuary.dev/reference/authentication/
+- https://docs.estuary.dev/getting-started/pricing/
+- https://docs.estuary.dev/concepts/
+responseCodes:
+  throttled: 429
+limits:
+- name: Control-Plane API Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No explicit RPM published for the PostgREST control-plane API.
+- name: Access Token Lifetime
+  scope: token
+  metric: seconds
+  limit: short-lived (expires; re-issue via generate_access_token)
+  notes: Access tokens expire after a predetermined duration; refresh tokens are long-lived.
+- name: Tenant Tasks Quota
+  scope: tenant
+  metric: tasks
+  limit: per-tenant quota (tasks_quota)
+  notes: Caps the number of running capture/materialization tasks per tenant.
+- name: Tenant Collections Quota
+  scope: tenant
+  metric: collections
+  limit: per-tenant quota (collections_quota)
+  notes: Caps the number of collections per tenant.
+- name: PostgREST Row Limit
+  scope: request
+  metric: rows
+  limit: default paging limit
+  notes: Use Range headers or limit/offset query params to page large result sets.
+policies:
+- name: Token Refresh
+  description: Exchange a long-lived refresh token for a short-lived access token via the generate_access_token RPC before it expires.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Async Job Polling
+  description: Publications and discovers are asynchronous; poll job_status at a modest interval rather than tight-looping.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
