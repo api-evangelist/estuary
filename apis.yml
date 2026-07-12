@@ -195,6 +195,10 @@ apis:
     short-lived access token via the generate_access_token RPC; inspect roles and
     capability grants (user_grants, role_grants) that authorize catalog access.
 common:
+- type: DomainSecurity
+  url: security/estuary-domain-security.yml
+- type: Authentication
+  url: authentication/estuary-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/estuary
 - type: LinkedIn
@@ -209,6 +213,8 @@ common:
   url: rate-limits/estuary-rate-limits.yml
 - type: FinOps
   url: finops/estuary-finops.yml
+- url: https://estuary.dev/blog/rss.xml
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

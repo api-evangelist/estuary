@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/estuary-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'Access token obtained from /rpc/generate_access_token by exchanging a refresh
+    token. Sent as Authorization: Bearer <access_token>.'
+  sources:
+  - openapi/estuary-openapi.yml
