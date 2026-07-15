@@ -195,6 +195,8 @@ apis:
     short-lived access token via the generate_access_token RPC; inspect roles and
     capability grants (user_grants, role_grants) that authorize catalog access.
 common:
+- type: AgenticAccess
+  url: agentic-access/estuary-agentic-access.yml
 - type: DomainSecurity
   url: security/estuary-domain-security.yml
 - type: Authentication
