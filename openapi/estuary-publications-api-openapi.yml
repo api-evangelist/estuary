@@ -1,0 +1,99 @@
+openapi: 3.0.1
+info:
+  title: Estuary Flow Control Plane Auth Publications API
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  termsOfService: https://estuary.dev/terms/
+  contact:
+    name: Estuary Support
+    email: support@estuary.dev
+  version: '1.0'
+servers:
+- url: https://api.estuary.dev
+  description: Estuary Flow control plane (Supabase/PostgREST)
+security:
+- bearerAuth: []
+tags:
+- name: Publications
+paths:
+  /publications:
+    get:
+      operationId: listPublications
+      tags:
+      - Publications
+      summary: List publication jobs and their status.
+      responses:
+        '200':
+          description: An array of publications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publication'
+    post:
+      operationId: createPublication
+      tags:
+      - Publications
+      summary: Publish a draft into the running data plane.
+      description: Enqueues an asynchronous publication of the given draft_id. Poll the created publication row until job_status.type transitions from queued to success or a failure state.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicationCreate'
+      responses:
+        '201':
+          description: The enqueued publication job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publication'
+components:
+  schemas:
+    PublicationCreate:
+      type: object
+      required:
+      - draft_id
+      properties:
+        draft_id:
+          type: string
+        dry_run:
+          type: boolean
+          default: false
+        detail:
+          type: string
+    JobStatus:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - queued
+          - buildFailed
+          - testFailed
+          - publishFailed
+          - success
+          - emptyDraft
+    Publication:
+      type: object
+      properties:
+        id:
+          type: string
+        draft_id:
+          type: string
+        dry_run:
+          type: boolean
+        job_status:
+          $ref: '#/components/schemas/JobStatus'
+        logs_token:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token obtained from /rpc/generate_access_token by exchanging a refresh token. Sent as Authorization: Bearer <access_token>.'

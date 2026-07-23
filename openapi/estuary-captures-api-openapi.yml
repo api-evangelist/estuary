@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: Estuary Flow Control Plane Auth Captures API
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  termsOfService: https://estuary.dev/terms/
+  contact:
+    name: Estuary Support
+    email: support@estuary.dev
+  version: '1.0'
+servers:
+- url: https://api.estuary.dev
+  description: Estuary Flow control plane (Supabase/PostgREST)
+security:
+- bearerAuth: []
+tags:
+- name: Captures
+paths:
+  /live_specs:
+    get:
+      operationId: listLiveSpecs
+      tags:
+      - Captures
+      summary: List live catalog specifications.
+      description: Returns published, running catalog entities. Filter by catalog_name and spec_type (capture, materialization, collection, test) using PostgREST operators, e.g. spec_type=eq.capture.
+      parameters:
+      - name: catalog_name
+        in: query
+        schema:
+          type: string
+        description: PostgREST filter, e.g. like.acmeCo/%25
+      - name: spec_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - capture
+          - materialization
+          - collection
+          - test
+        description: PostgREST filter, e.g. eq.capture
+      - $ref: '#/components/parameters/Select'
+      responses:
+        '200':
+          description: An array of live specs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiveSpec'
+  /live_specs/{id}:
+    get:
+      operationId: getLiveSpec
+      tags:
+      - Captures
+      summary: Get a single live specification.
+      parameters:
+      - $ref: '#/components/parameters/RowId'
+      responses:
+        '200':
+          description: The live spec.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveSpec'
+components:
+  parameters:
+    Select:
+      name: select
+      in: query
+      schema:
+        type: string
+      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
+  schemas:
+    LiveSpec:
+      type: object
+      properties:
+        id:
+          type: string
+        catalog_name:
+          type: string
+        spec_type:
+          type: string
+          enum:
+          - capture
+          - materialization
+          - collection
+          - test
+        spec:
+          type: object
+          description: The full catalog spec document.
+        connector_image_name:
+          type: string
+          nullable: true
+        connector_image_tag:
+          type: string
+          nullable: true
+        reads_from:
+          type: array
+          items:
+            type: string
+        writes_to:
+          type: array
+          items:
+            type: string
+        last_pub_id:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token obtained from /rpc/generate_access_token by exchanging a refresh token. Sent as Authorization: Bearer <access_token>.'

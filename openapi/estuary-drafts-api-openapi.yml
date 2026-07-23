@@ -1,0 +1,179 @@
+openapi: 3.0.1
+info:
+  title: Estuary Flow Control Plane Auth Drafts API
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  termsOfService: https://estuary.dev/terms/
+  contact:
+    name: Estuary Support
+    email: support@estuary.dev
+  version: '1.0'
+servers:
+- url: https://api.estuary.dev
+  description: Estuary Flow control plane (Supabase/PostgREST)
+security:
+- bearerAuth: []
+tags:
+- name: Drafts
+paths:
+  /drafts:
+    get:
+      operationId: listDrafts
+      tags:
+      - Drafts
+      summary: List drafts owned by the user.
+      responses:
+        '200':
+          description: An array of drafts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Draft'
+    post:
+      operationId: createDraft
+      tags:
+      - Drafts
+      summary: Create a new empty draft.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftCreate'
+      responses:
+        '201':
+          description: The created draft.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Draft'
+  /drafts/{id}:
+    delete:
+      operationId: deleteDraft
+      tags:
+      - Drafts
+      summary: Delete a draft and its draft specs.
+      parameters:
+      - $ref: '#/components/parameters/RowId'
+      responses:
+        '204':
+          description: Deleted.
+  /draft_specs:
+    get:
+      operationId: listDraftSpecs
+      tags:
+      - Drafts
+      summary: List the specs staged within drafts.
+      parameters:
+      - name: draft_id
+        in: query
+        schema:
+          type: string
+        description: PostgREST filter, e.g. eq.<draft_id>
+      responses:
+        '200':
+          description: An array of draft specs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DraftSpec'
+    post:
+      operationId: upsertDraftSpec
+      tags:
+      - Drafts
+      summary: Add or replace a capture, materialization, or collection spec in a draft.
+      description: Upsert a draft_spec keyed by (draft_id, catalog_name). Send the Prefer header 'resolution=merge-duplicates' to update in place.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftSpecUpsert'
+      responses:
+        '201':
+          description: The upserted draft spec.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DraftSpec'
+components:
+  schemas:
+    DraftCreate:
+      type: object
+      properties:
+        detail:
+          type: string
+    DraftSpecUpsert:
+      type: object
+      required:
+      - draft_id
+      - catalog_name
+      properties:
+        draft_id:
+          type: string
+        catalog_name:
+          type: string
+        spec_type:
+          type: string
+          enum:
+          - capture
+          - materialization
+          - collection
+          - test
+        spec:
+          type: object
+    Draft:
+      type: object
+      properties:
+        id:
+          type: string
+        detail:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    DraftSpec:
+      type: object
+      properties:
+        id:
+          type: string
+        draft_id:
+          type: string
+        catalog_name:
+          type: string
+        spec_type:
+          type: string
+          nullable: true
+          enum:
+          - capture
+          - materialization
+          - collection
+          - test
+        spec:
+          type: object
+          nullable: true
+          description: The proposed spec document; null requests deletion on publish.
+        expect_pub_id:
+          type: string
+          nullable: true
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token obtained from /rpc/generate_access_token by exchanging a refresh token. Sent as Authorization: Bearer <access_token>.'

@@ -1,0 +1,194 @@
+openapi: 3.0.1
+info:
+  title: Estuary Flow Control Plane Auth API
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  termsOfService: https://estuary.dev/terms/
+  contact:
+    name: Estuary Support
+    email: support@estuary.dev
+  version: '1.0'
+servers:
+- url: https://api.estuary.dev
+  description: Estuary Flow control plane (Supabase/PostgREST)
+security:
+- bearerAuth: []
+tags:
+- name: Auth
+paths:
+  /rpc/generate_access_token:
+    post:
+      operationId: generateAccessToken
+      tags:
+      - Auth
+      summary: Exchange a refresh token for a short-lived access token.
+      description: PostgREST RPC that accepts a refresh_token id and secret and returns a signed access_token used as the Authorization Bearer credential for all other control-plane calls.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateAccessTokenRequest'
+      responses:
+        '200':
+          description: A new access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '401':
+          description: Invalid or expired refresh token.
+  /refresh_tokens:
+    get:
+      operationId: listRefreshTokens
+      tags:
+      - Auth
+      summary: List refresh tokens for the authenticated user.
+      responses:
+        '200':
+          description: An array of refresh tokens.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RefreshToken'
+    post:
+      operationId: createRefreshToken
+      tags:
+      - Auth
+      summary: Create a new long-lived refresh token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenCreate'
+      responses:
+        '201':
+          description: The created refresh token (secret returned once).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshToken'
+  /refresh_tokens/{id}:
+    delete:
+      operationId: deleteRefreshToken
+      tags:
+      - Auth
+      summary: Revoke a refresh token.
+      parameters:
+      - $ref: '#/components/parameters/RowId'
+      responses:
+        '204':
+          description: Revoked.
+  /user_grants:
+    get:
+      operationId: listUserGrants
+      tags:
+      - Auth
+      summary: List capability grants from users to catalog prefixes.
+      responses:
+        '200':
+          description: An array of user grants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grant'
+  /role_grants:
+    get:
+      operationId: listRoleGrants
+      tags:
+      - Auth
+      summary: List capability grants between catalog prefixes (roles).
+      responses:
+        '200':
+          description: An array of role grants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grant'
+components:
+  schemas:
+    RefreshToken:
+      type: object
+      properties:
+        id:
+          type: string
+        detail:
+          type: string
+          nullable: true
+        secret:
+          type: string
+          nullable: true
+          description: Returned only at creation time.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    GenerateAccessTokenRequest:
+      type: object
+      required:
+      - refresh_token
+      properties:
+        refresh_token:
+          type: object
+          properties:
+            id:
+              type: string
+            secret:
+              type: string
+    Grant:
+      type: object
+      properties:
+        id:
+          type: string
+        subject_role:
+          type: string
+        object_role:
+          type: string
+        capability:
+          type: string
+          enum:
+          - read
+          - write
+          - admin
+    RefreshTokenCreate:
+      type: object
+      properties:
+        detail:
+          type: string
+        multi_use:
+          type: boolean
+        valid_for:
+          type: string
+          description: Postgres interval, e.g. '90 days'.
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Short-lived signed JWT for Authorization Bearer.
+        refresh_token:
+          type: object
+          nullable: true
+          description: Optionally-rotated refresh token secret.
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token obtained from /rpc/generate_access_token by exchanging a refresh token. Sent as Authorization: Bearer <access_token>.'
