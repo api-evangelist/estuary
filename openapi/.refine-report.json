@@ -1,0 +1,28 @@
+{
+  "provider": "estuary",
+  "sources": [
+    "estuary-auth-api-openapi.yml",
+    "estuary-captures-api-openapi.yml",
+    "estuary-collections-api-openapi.yml",
+    "estuary-connectors-api-openapi.yml",
+    "estuary-drafts-api-openapi.yml",
+    "estuary-materializations-api-openapi.yml",
+    "estuary-publications-api-openapi.yml",
+    "estuary-tenants-api-openapi.yml"
+  ],
+  "outputs": [
+    "estuary-auth-api-openapi.yml",
+    "estuary-captures-api-openapi.yml",
+    "estuary-collections-api-openapi.yml",
+    "estuary-connectors-api-openapi.yml",
+    "estuary-drafts-api-openapi.yml",
+    "estuary-materializations-api-openapi.yml",
+    "estuary-publications-api-openapi.yml",
+    "estuary-tenants-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
