@@ -1,0 +1,319 @@
+{
+  "item": [
+    {
+      "id": "e5ce2b97-3a34-45f6-b64b-74b4d1e19f52",
+      "name": "Collections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6a79838-0061-4af4-9bbe-fe527e90be8c",
+          "name": "List live catalog specifications.",
+          "request": {
+            "name": "List live catalog specifications.",
+            "description": {
+              "content": "Returns published, running catalog entities. Filter by catalog_name and spec_type (capture, materialization, collection, test) using PostgREST operators, e.g. spec_type=eq.capture.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "live_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>",
+                  "description": "PostgREST filter, e.g. like.acmeCo/%25"
+                },
+                {
+                  "disabled": false,
+                  "key": "spec_type",
+                  "value": "<string>",
+                  "description": "PostgREST filter, e.g. eq.capture"
+                },
+                {
+                  "disabled": false,
+                  "key": "select",
+                  "value": "<string>",
+                  "description": "PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a922238b-1973-443e-be23-41dfe4614567",
+              "name": "An array of live specs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live_specs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spec_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"catalog_name\": \"string\",\n    \"spec_type\": \"collection\",\n    \"spec\": {},\n    \"connector_image_name\": \"string\",\n    \"connector_image_tag\": \"string\",\n    \"reads_from\": [\n      \"string\",\n      \"string\"\n    ],\n    \"writes_to\": [\n      \"string\",\n      \"string\"\n    ],\n    \"last_pub_id\": \"string\",\n    \"updated_at\": \"2007-01-30T12:28:33.469Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"catalog_name\": \"string\",\n    \"spec_type\": \"capture\",\n    \"spec\": {},\n    \"connector_image_name\": \"string\",\n    \"connector_image_tag\": \"string\",\n    \"reads_from\": [\n      \"string\",\n      \"string\"\n    ],\n    \"writes_to\": [\n      \"string\",\n      \"string\"\n    ],\n    \"last_pub_id\": \"string\",\n    \"updated_at\": \"1988-01-17T13:58:19.745Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b16efc4-82f7-4d34-83e2-5ec0691ff805",
+          "name": "Get a single live specification.",
+          "request": {
+            "name": "Get a single live specification.",
+            "description": {},
+            "url": {
+              "path": [
+                "live_specs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56d6912e-cedc-449b-84c3-73d2f1abe9f4",
+              "name": "The live spec.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live_specs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"catalog_name\": \"string\",\n  \"spec_type\": \"collection\",\n  \"spec\": {},\n  \"connector_image_name\": \"string\",\n  \"connector_image_tag\": \"string\",\n  \"reads_from\": [\n    \"string\",\n    \"string\"\n  ],\n  \"writes_to\": [\n    \"string\",\n    \"string\"\n  ],\n  \"last_pub_id\": \"string\",\n  \"updated_at\": \"2013-09-29T00:45:25.928Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06e37e43-0d60-40e3-bcfa-dc378331a470",
+          "name": "List data-flow edges between live specs (source to target lineage).",
+          "request": {
+            "name": "List data-flow edges between live specs (source to target lineage).",
+            "description": {},
+            "url": {
+              "path": [
+                "live_spec_flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc0c9003-2d74-408d-b454-c76b93a16fef",
+              "name": "An array of live spec flow edges.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live_spec_flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"source_id\": \"string\",\n    \"target_id\": \"string\",\n    \"flow_type\": \"materialization\"\n  },\n  {\n    \"source_id\": \"string\",\n    \"target_id\": \"string\",\n    \"flow_type\": \"collection\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4412619f-ec11-4e7c-b057-57d12925a537",
+    "name": "Estuary Flow Control Plane Auth Collections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

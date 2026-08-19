@@ -1,0 +1,594 @@
+{
+  "item": [
+    {
+      "id": "6f5cb913-f8f3-4f23-9691-9a933159a49f",
+      "name": "Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28f4733b-352a-4b35-9b37-6c6d43b346f1",
+          "name": "Exchange a refresh token for a short-lived access token.",
+          "request": {
+            "name": "Exchange a refresh token for a short-lived access token.",
+            "description": {
+              "content": "PostgREST RPC that accepts a refresh_token id and secret and returns a signed access_token used as the Authorization Bearer credential for all other control-plane calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rpc",
+                "generate_access_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": {\n    \"id\": \"<string>\",\n    \"secret\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5788f847-b161-4a49-a326-ce2031fda5fb",
+              "name": "A new access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rpc",
+                    "generate_access_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refresh_token\": {\n    \"id\": \"<string>\",\n    \"secret\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5834cfd7-bc32-45b7-9789-f76300e7f3f3",
+              "name": "Invalid or expired refresh token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rpc",
+                    "generate_access_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refresh_token\": {\n    \"id\": \"<string>\",\n    \"secret\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c9b0510-abc5-40a2-8ac6-49fa8869d2ad",
+          "name": "List refresh tokens for the authenticated user.",
+          "request": {
+            "name": "List refresh tokens for the authenticated user.",
+            "description": {},
+            "url": {
+              "path": [
+                "refresh_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2148a27a-a1ec-4b42-b7c8-bf103e340446",
+              "name": "An array of refresh tokens.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refresh_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"detail\": \"string\",\n    \"secret\": \"string\",\n    \"created_at\": \"1949-02-20T18:52:13.236Z\",\n    \"updated_at\": \"2020-02-01T08:25:39.660Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"detail\": \"string\",\n    \"secret\": \"string\",\n    \"created_at\": \"2024-11-21T22:16:16.740Z\",\n    \"updated_at\": \"1992-09-26T17:07:44.006Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52a11c22-8f6e-48b0-9a53-2599fee7f40a",
+          "name": "Create a new long-lived refresh token.",
+          "request": {
+            "name": "Create a new long-lived refresh token.",
+            "description": {},
+            "url": {
+              "path": [
+                "refresh_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detail\": \"<string>\",\n  \"multi_use\": \"<boolean>\",\n  \"valid_for\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e453777-d511-4ad8-9f37-5cdc32a7bcf1",
+              "name": "The created refresh token (secret returned once).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refresh_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detail\": \"<string>\",\n  \"multi_use\": \"<boolean>\",\n  \"valid_for\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"detail\": \"string\",\n  \"secret\": \"string\",\n  \"created_at\": \"1996-10-03T19:16:48.717Z\",\n  \"updated_at\": \"1952-12-18T14:26:42.891Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fcbc382-936c-4c0f-96d9-fe92d5f46e54",
+          "name": "Revoke a refresh token.",
+          "request": {
+            "name": "Revoke a refresh token.",
+            "description": {},
+            "url": {
+              "path": [
+                "refresh_tokens",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc504d8f-5813-48c4-80da-09e3b2668aa5",
+              "name": "Revoked.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refresh_tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6037c428-af21-4e6c-b598-018bab0bba51",
+          "name": "List capability grants from users to catalog prefixes.",
+          "request": {
+            "name": "List capability grants from users to catalog prefixes.",
+            "description": {},
+            "url": {
+              "path": [
+                "user_grants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbf0d147-b8b5-441c-81f3-14cd5865e6e2",
+              "name": "An array of user grants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_grants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"subject_role\": \"string\",\n    \"object_role\": \"string\",\n    \"capability\": \"read\"\n  },\n  {\n    \"id\": \"string\",\n    \"subject_role\": \"string\",\n    \"object_role\": \"string\",\n    \"capability\": \"write\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef182f6f-6691-43ab-b825-c3f8bacef937",
+          "name": "List capability grants between catalog prefixes (roles).",
+          "request": {
+            "name": "List capability grants between catalog prefixes (roles).",
+            "description": {},
+            "url": {
+              "path": [
+                "role_grants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9aa03008-68a0-45d0-bc56-2ff7393d727e",
+              "name": "An array of role grants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "role_grants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"subject_role\": \"string\",\n    \"object_role\": \"string\",\n    \"capability\": \"read\"\n  },\n  {\n    \"id\": \"string\",\n    \"subject_role\": \"string\",\n    \"object_role\": \"string\",\n    \"capability\": \"write\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a7222f73-532f-4d5d-80d3-fe270da6d71f",
+    "name": "Estuary Flow Control Plane Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

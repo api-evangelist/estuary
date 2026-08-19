@@ -1,0 +1,290 @@
+{
+  "item": [
+    {
+      "id": "408bfd5f-09dc-438f-82a1-7cc64cb81074",
+      "name": "Connectors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed1f1c0a-7e03-4551-9c2b-952a0b612fd2",
+          "name": "Run connector schema discovery.",
+          "request": {
+            "name": "Run connector schema discovery.",
+            "description": {
+              "content": "Enqueues a discovery job against a connector image and endpoint config, producing recommended bindings and collection schemas for a capture.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "discovers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector_tag_id\": \"<string>\",\n  \"endpoint_config\": \"<object>\",\n  \"capture_name\": \"<string>\",\n  \"draft_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b55bd3c-02ad-44c7-89c4-b3151b975f54",
+              "name": "The enqueued discover job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discovers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector_tag_id\": \"<string>\",\n  \"endpoint_config\": \"<object>\",\n  \"capture_name\": \"<string>\",\n  \"draft_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"connector_tag_id\": \"string\",\n  \"draft_id\": \"string\",\n  \"job_status\": {\n    \"type\": \"emptyDraft\"\n  },\n  \"logs_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89fbb4a7-3718-41e3-8e38-cb69f2c968a5",
+          "name": "List available capture and materialization connectors.",
+          "request": {
+            "name": "List available capture and materialization connectors.",
+            "description": {},
+            "url": {
+              "path": [
+                "connectors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29088aa8-e48c-4e69-b5ee-23e44dd17fd7",
+              "name": "An array of connectors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"image_name\": \"string\",\n    \"title\": {},\n    \"short_description\": {},\n    \"recommended\": true\n  },\n  {\n    \"id\": \"string\",\n    \"image_name\": \"string\",\n    \"title\": {},\n    \"short_description\": {},\n    \"recommended\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "708c87b0-909f-4b90-9c56-78e37a777902",
+          "name": "List tagged image versions of connectors and their endpoint spec schemas.",
+          "request": {
+            "name": "List tagged image versions of connectors and their endpoint spec schemas.",
+            "description": {},
+            "url": {
+              "path": [
+                "connector_tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9ce1504-29f8-40c7-9c2a-b7b6e79fd55c",
+              "name": "An array of connector tags.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connector_tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"connector_id\": \"string\",\n    \"image_tag\": \"string\",\n    \"protocol\": \"materialize\",\n    \"endpoint_spec_schema\": {},\n    \"resource_spec_schema\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"connector_id\": \"string\",\n    \"image_tag\": \"string\",\n    \"protocol\": \"materialize\",\n    \"endpoint_spec_schema\": {},\n    \"resource_spec_schema\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "915c7055-7e1a-42ca-ae43-91c73863199c",
+    "name": "Estuary Flow Control Plane Auth Connectors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

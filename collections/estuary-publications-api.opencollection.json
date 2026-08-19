@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane Auth Publications API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Publications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List publication jobs and their status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/publications"
+          },
+          "docs": "List publication jobs and their status."
+        },
+        {
+          "info": {
+            "name": "Publish a draft into the running data plane.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/publications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enqueues an asynchronous publication of the given draft_id. Poll the created publication row until job_status.type transitions from queued to success or a failure state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

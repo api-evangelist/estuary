@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane Auth Tenants API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tenants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tenants (billing/ownership prefixes) the user can access.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/tenants"
+          },
+          "docs": "List tenants (billing/ownership prefixes) the user can access."
+        },
+        {
+          "info": {
+            "name": "Read usage statistics (bytes and docs) per catalog entity and grain.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/catalog_stats",
+            "params": [
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "grain",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read usage statistics (bytes and docs) per catalog entity and grain."
+        },
+        {
+          "info": {
+            "name": "Compute the monthly billing estimate for a tenant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/rpc/billing_report_202308",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "RPC returning the data-movement GB, connector-instance line items, and total for a tenant and billed month."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

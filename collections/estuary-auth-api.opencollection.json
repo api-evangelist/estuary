@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane Auth API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Exchange a refresh token for a short-lived access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/rpc/generate_access_token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PostgREST RPC that accepts a refresh_token id and secret and returns a signed access_token used as the Authorization Bearer credential for all other control-plane calls."
+        },
+        {
+          "info": {
+            "name": "List refresh tokens for the authenticated user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/refresh_tokens"
+          },
+          "docs": "List refresh tokens for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a new long-lived refresh token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/refresh_tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new long-lived refresh token."
+        },
+        {
+          "info": {
+            "name": "Revoke a refresh token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.estuary.dev/refresh_tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "PostgREST row id filter, e.g. eq.<flowid>"
+              }
+            ]
+          },
+          "docs": "Revoke a refresh token."
+        },
+        {
+          "info": {
+            "name": "List capability grants from users to catalog prefixes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/user_grants"
+          },
+          "docs": "List capability grants from users to catalog prefixes."
+        },
+        {
+          "info": {
+            "name": "List capability grants between catalog prefixes (roles).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/role_grants"
+          },
+          "docs": "List capability grants between catalog prefixes (roles)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

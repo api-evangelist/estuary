@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane Auth Materializations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Materializations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List live catalog specifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/live_specs",
+            "params": [
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "query",
+                "description": "PostgREST filter, e.g. like.acmeCo/%25"
+              },
+              {
+                "name": "spec_type",
+                "value": "",
+                "type": "query",
+                "description": "PostgREST filter, e.g. eq.capture"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type"
+              }
+            ]
+          },
+          "docs": "Returns published, running catalog entities. Filter by catalog_name and spec_type (capture, materialization, collection, test) using PostgREST operators, e.g. spec_type=eq.capture."
+        },
+        {
+          "info": {
+            "name": "Get a single live specification.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/live_specs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "PostgREST row id filter, e.g. eq.<flowid>"
+              }
+            ]
+          },
+          "docs": "Get a single live specification."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

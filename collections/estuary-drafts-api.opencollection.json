@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane Auth Drafts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Drafts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List drafts owned by the user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/drafts"
+          },
+          "docs": "List drafts owned by the user."
+        },
+        {
+          "info": {
+            "name": "Create a new empty draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/drafts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new empty draft."
+        },
+        {
+          "info": {
+            "name": "Delete a draft and its draft specs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.estuary.dev/drafts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "PostgREST row id filter, e.g. eq.<flowid>"
+              }
+            ]
+          },
+          "docs": "Delete a draft and its draft specs."
+        },
+        {
+          "info": {
+            "name": "List the specs staged within drafts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/draft_specs",
+            "params": [
+              {
+                "name": "draft_id",
+                "value": "",
+                "type": "query",
+                "description": "PostgREST filter, e.g. eq.<draft_id>"
+              }
+            ]
+          },
+          "docs": "List the specs staged within drafts."
+        },
+        {
+          "info": {
+            "name": "Add or replace a capture, materialization, or collection spec in a draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/draft_specs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upsert a draft_spec keyed by (draft_id, catalog_name). Send the Prefer header 'resolution=merge-duplicates' to update in place."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

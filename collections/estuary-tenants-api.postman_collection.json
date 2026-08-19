@@ -1,0 +1,312 @@
+{
+  "item": [
+    {
+      "id": "a3112b72-449d-4059-808f-ae40358c68a1",
+      "name": "Tenants",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c970aaf-0f94-472c-8e42-bc2b838457aa",
+          "name": "List tenants (billing/ownership prefixes) the user can access.",
+          "request": {
+            "name": "List tenants (billing/ownership prefixes) the user can access.",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1fbf631-4c2d-4356-886c-040cb9bafbcb",
+              "name": "An array of tenants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"tenant\": \"string\",\n    \"tasks_quota\": 5960,\n    \"collections_quota\": 1669,\n    \"created_at\": \"2020-07-23T23:12:18.236Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"tenant\": \"string\",\n    \"tasks_quota\": 2721,\n    \"collections_quota\": 1862,\n    \"created_at\": \"1971-08-12T17:43:33.106Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d69f19fd-e463-41ac-85b8-cf1f59618ab9",
+          "name": "Read usage statistics (bytes and docs) per catalog entity and grain.",
+          "request": {
+            "name": "Read usage statistics (bytes and docs) per catalog entity and grain.",
+            "description": {},
+            "url": {
+              "path": [
+                "catalog_stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "grain",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22ef161c-eeea-4edd-aea2-e7f08fd56b46",
+              "name": "An array of catalog stat rows.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog_stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "grain",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"catalog_name\": \"string\",\n    \"grain\": \"monthly\",\n    \"ts\": \"1988-09-15T11:21:40.506Z\",\n    \"bytes_written_by_me\": 7352,\n    \"bytes_read_by_me\": 7974,\n    \"docs_written_by_me\": 7653,\n    \"docs_read_by_me\": 9011\n  },\n  {\n    \"catalog_name\": \"string\",\n    \"grain\": \"daily\",\n    \"ts\": \"1992-06-07T08:13:01.416Z\",\n    \"bytes_written_by_me\": 8156,\n    \"bytes_read_by_me\": 1954,\n    \"docs_written_by_me\": 5037,\n    \"docs_read_by_me\": 831\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c4fe20b-736e-441e-86ac-d7125ef68a66",
+          "name": "Compute the monthly billing estimate for a tenant.",
+          "request": {
+            "name": "Compute the monthly billing estimate for a tenant.",
+            "description": {
+              "content": "RPC returning the data-movement GB, connector-instance line items, and total for a tenant and billed month.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rpc",
+                "billing_report_202308"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billed_prefix\": \"<string>\",\n  \"billed_month\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "02d5f75d-f737-478a-bbdf-c06a9a88fa64",
+              "name": "The billing report.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rpc",
+                    "billing_report_202308"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billed_prefix\": \"<string>\",\n  \"billed_month\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billed_prefix\": \"string\",\n  \"billed_month\": \"string\",\n  \"line_items\": [\n    {\n      \"description\": \"string\",\n      \"count\": 7868.553413801921,\n      \"rate\": 9568.774386164912,\n      \"subtotal\": 7726.757449456913\n    },\n    {\n      \"description\": \"string\",\n      \"count\": 420.9812782137501,\n      \"rate\": 101.61670815302726,\n      \"subtotal\": 978.1626337887228\n    }\n  ],\n  \"total_processed_data_gb\": 4401.110343222455,\n  \"subtotal\": 8443.91257231777\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7098862f-1d2d-477d-a842-5d8ea9d2d749",
+    "name": "Estuary Flow Control Plane Auth Tenants API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

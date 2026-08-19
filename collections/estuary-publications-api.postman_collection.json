@@ -1,0 +1,215 @@
+{
+  "item": [
+    {
+      "id": "50ab5a2d-f067-4296-a7a9-910dbd3be689",
+      "name": "Publications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7eea63cb-8e0b-4931-a5bc-2841ddd26e9e",
+          "name": "List publication jobs and their status.",
+          "request": {
+            "name": "List publication jobs and their status.",
+            "description": {},
+            "url": {
+              "path": [
+                "publications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc1ca05b-9e66-45a0-a175-a40b99729552",
+              "name": "An array of publications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "publications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"draft_id\": \"string\",\n    \"dry_run\": true,\n    \"job_status\": {\n      \"type\": \"queued\"\n    },\n    \"logs_token\": \"string\",\n    \"created_at\": \"1971-02-06T22:53:01.733Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"draft_id\": \"string\",\n    \"dry_run\": false,\n    \"job_status\": {\n      \"type\": \"queued\"\n    },\n    \"logs_token\": \"string\",\n    \"created_at\": \"1973-09-21T04:48:58.420Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e86cf14d-be01-4899-9e9f-ef7132ca9ee5",
+          "name": "Publish a draft into the running data plane.",
+          "request": {
+            "name": "Publish a draft into the running data plane.",
+            "description": {
+              "content": "Enqueues an asynchronous publication of the given draft_id. Poll the created publication row until job_status.type transitions from queued to success or a failure state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "publications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"draft_id\": \"<string>\",\n  \"dry_run\": false,\n  \"detail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1d284a42-ee13-426b-a45e-3f8a2413147e",
+              "name": "The enqueued publication job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "publications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"draft_id\": \"<string>\",\n  \"dry_run\": false,\n  \"detail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"draft_id\": \"string\",\n  \"dry_run\": false,\n  \"job_status\": {\n    \"type\": \"testFailed\"\n  },\n  \"logs_token\": \"string\",\n  \"created_at\": \"1991-07-14T21:36:40.037Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff66cf01-f73b-4467-93f6-19e9971c2537",
+    "name": "Estuary Flow Control Plane Auth Publications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

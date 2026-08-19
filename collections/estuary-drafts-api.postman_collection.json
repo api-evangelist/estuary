@@ -1,0 +1,481 @@
+{
+  "item": [
+    {
+      "id": "29552b67-b51d-4dd3-9a79-2c36e9d81f3b",
+      "name": "Drafts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "242b9281-1db6-4589-85de-187b56f045f9",
+          "name": "List drafts owned by the user.",
+          "request": {
+            "name": "List drafts owned by the user.",
+            "description": {},
+            "url": {
+              "path": [
+                "drafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4747f9fd-2fb0-43d4-88ac-30c5d2e62340",
+              "name": "An array of drafts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"detail\": \"string\",\n    \"created_at\": \"1999-05-31T21:00:40.616Z\",\n    \"updated_at\": \"1966-10-23T02:30:20.757Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"detail\": \"string\",\n    \"created_at\": \"1964-10-05T07:47:55.172Z\",\n    \"updated_at\": \"2008-07-03T02:07:41.846Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "483b8008-48fd-4fb4-a4d3-66715a7d79bb",
+          "name": "Create a new empty draft.",
+          "request": {
+            "name": "Create a new empty draft.",
+            "description": {},
+            "url": {
+              "path": [
+                "drafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7cedadc8-c9bd-442b-a793-246af8d537a7",
+              "name": "The created draft.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"detail\": \"string\",\n  \"created_at\": \"1975-08-02T05:36:08.542Z\",\n  \"updated_at\": \"2009-11-29T21:07:44.893Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b4f1a3a-efa6-45e1-8cab-374ccaa0e54f",
+          "name": "Delete a draft and its draft specs.",
+          "request": {
+            "name": "Delete a draft and its draft specs.",
+            "description": {},
+            "url": {
+              "path": [
+                "drafts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1332fbda-9431-44b7-ac14-408c2dda3bf8",
+              "name": "Deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drafts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43e61d78-5d14-47ee-8b54-4f8a0ccf5fc9",
+          "name": "List the specs staged within drafts.",
+          "request": {
+            "name": "List the specs staged within drafts.",
+            "description": {},
+            "url": {
+              "path": [
+                "draft_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "draft_id",
+                  "value": "<string>",
+                  "description": "PostgREST filter, e.g. eq.<draft_id>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f95ffe9-f63f-4b36-9847-870e214ba855",
+              "name": "An array of draft specs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "draft_specs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "draft_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"draft_id\": \"string\",\n    \"catalog_name\": \"string\",\n    \"spec_type\": \"materialization\",\n    \"spec\": {},\n    \"expect_pub_id\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"draft_id\": \"string\",\n    \"catalog_name\": \"string\",\n    \"spec_type\": \"materialization\",\n    \"spec\": {},\n    \"expect_pub_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7ebb7e0-a779-41d6-9af5-2f1c1df08e7d",
+          "name": "Add or replace a capture, materialization, or collection spec in a draft.",
+          "request": {
+            "name": "Add or replace a capture, materialization, or collection spec in a draft.",
+            "description": {
+              "content": "Upsert a draft_spec keyed by (draft_id, catalog_name). Send the Prefer header 'resolution=merge-duplicates' to update in place.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "draft_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"draft_id\": \"<string>\",\n  \"catalog_name\": \"<string>\",\n  \"spec_type\": \"<string>\",\n  \"spec\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8cf87920-9519-43fb-9a30-370149a10862",
+              "name": "The upserted draft spec.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "draft_specs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"draft_id\": \"<string>\",\n  \"catalog_name\": \"<string>\",\n  \"spec_type\": \"<string>\",\n  \"spec\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"draft_id\": \"string\",\n  \"catalog_name\": \"string\",\n  \"spec_type\": \"materialization\",\n  \"spec\": {},\n  \"expect_pub_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fe765f29-5d3d-45bd-8709-ecc9bbbc09c9",
+    "name": "Estuary Flow Control Plane Auth Drafts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}

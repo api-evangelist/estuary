@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estuary Flow Control Plane Auth Connectors API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run connector schema discovery.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.estuary.dev/discovers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enqueues a discovery job against a connector image and endpoint config, producing recommended bindings and collection schemas for a capture."
+        },
+        {
+          "info": {
+            "name": "List available capture and materialization connectors.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/connectors"
+          },
+          "docs": "List available capture and materialization connectors."
+        },
+        {
+          "info": {
+            "name": "List tagged image versions of connectors and their endpoint spec schemas.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.estuary.dev/connector_tags"
+          },
+          "docs": "List tagged image versions of connectors and their endpoint spec schemas."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

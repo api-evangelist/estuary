@@ -1,0 +1,244 @@
+{
+  "item": [
+    {
+      "id": "10557467-ecf3-4533-9dcd-032fe4c36b37",
+      "name": "Captures",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2b28c44-e437-43f8-b0b4-29c96734e448",
+          "name": "List live catalog specifications.",
+          "request": {
+            "name": "List live catalog specifications.",
+            "description": {
+              "content": "Returns published, running catalog entities. Filter by catalog_name and spec_type (capture, materialization, collection, test) using PostgREST operators, e.g. spec_type=eq.capture.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "live_specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>",
+                  "description": "PostgREST filter, e.g. like.acmeCo/%25"
+                },
+                {
+                  "disabled": false,
+                  "key": "spec_type",
+                  "value": "<string>",
+                  "description": "PostgREST filter, e.g. eq.capture"
+                },
+                {
+                  "disabled": false,
+                  "key": "select",
+                  "value": "<string>",
+                  "description": "PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "495d65b8-0862-4166-beaa-55abca1fd3b4",
+              "name": "An array of live specs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live_specs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spec_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"catalog_name\": \"string\",\n    \"spec_type\": \"test\",\n    \"spec\": {},\n    \"connector_image_name\": \"string\",\n    \"connector_image_tag\": \"string\",\n    \"reads_from\": [\n      \"string\",\n      \"string\"\n    ],\n    \"writes_to\": [\n      \"string\",\n      \"string\"\n    ],\n    \"last_pub_id\": \"string\",\n    \"updated_at\": \"1988-08-15T04:24:56.955Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"catalog_name\": \"string\",\n    \"spec_type\": \"materialization\",\n    \"spec\": {},\n    \"connector_image_name\": \"string\",\n    \"connector_image_tag\": \"string\",\n    \"reads_from\": [\n      \"string\",\n      \"string\"\n    ],\n    \"writes_to\": [\n      \"string\",\n      \"string\"\n    ],\n    \"last_pub_id\": \"string\",\n    \"updated_at\": \"2000-03-07T02:49:10.989Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd1b51c9-b544-4c19-ab5f-44b77efb0ba9",
+          "name": "Get a single live specification.",
+          "request": {
+            "name": "Get a single live specification.",
+            "description": {},
+            "url": {
+              "path": [
+                "live_specs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fb1d804-6d31-42db-bf7e-eac896c19fdb",
+              "name": "The live spec.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live_specs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) PostgREST row id filter, e.g. eq.<flowid>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"catalog_name\": \"string\",\n  \"spec_type\": \"test\",\n  \"spec\": {},\n  \"connector_image_name\": \"string\",\n  \"connector_image_tag\": \"string\",\n  \"reads_from\": [\n    \"string\",\n    \"string\"\n  ],\n  \"writes_to\": [\n    \"string\",\n    \"string\"\n  ],\n  \"last_pub_id\": \"string\",\n  \"updated_at\": \"1971-11-23T11:16:59.462Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.estuary.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ec1c699-f530-4bc7-9a19-3004710ac605",
+    "name": "Estuary Flow Control Plane Auth Captures API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.\n\nContact Support:\n Name: Estuary Support\n Email: support@estuary.dev",
+      "type": "text/plain"
+    }
+  }
+}
