@@ -10,6 +10,18 @@ description: Estuary builds Estuary Flow, a real-time data movement platform for
   captures, materializations, collections, catalog drafts and publications,
   connectors, and tenants/billing, while the data plane is driven declaratively
   via the flowctl CLI and a Gitops model.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
