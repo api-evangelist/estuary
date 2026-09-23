@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Estuary Flow Control Plane Auth Connectors API
-  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  title: Estuary Flow Control Plane Connectors API
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow.
   termsOfService: https://estuary.dev/terms/
   contact:
     name: Estuary Support
@@ -20,7 +20,7 @@ paths:
       operationId: createDiscover
       tags:
       - Connectors
-      summary: Run connector schema discovery.
+      summary: Run connector schema discovery
       description: Enqueues a discovery job against a connector image and endpoint config, producing recommended bindings and collection schemas for a capture.
       requestBody:
         required: true
@@ -40,7 +40,7 @@ paths:
       operationId: listConnectors
       tags:
       - Connectors
-      summary: List available capture and materialization connectors.
+      summary: List available capture and materialization connectors
       responses:
         '200':
           description: An array of connectors.
@@ -55,7 +55,7 @@ paths:
       operationId: listConnectorTags
       tags:
       - Connectors
-      summary: List tagged image versions of connectors and their endpoint spec schemas.
+      summary: List tagged image versions of connectors and their endpoint spec schemas
       responses:
         '200':
           description: An array of connector tags.
@@ -67,6 +67,21 @@ paths:
                   $ref: '#/components/schemas/ConnectorTag'
 components:
   schemas:
+    DiscoverCreate:
+      type: object
+      required:
+      - connector_tag_id
+      - endpoint_config
+      - capture_name
+      properties:
+        connector_tag_id:
+          type: string
+        endpoint_config:
+          type: object
+        capture_name:
+          type: string
+        draft_id:
+          type: string
     ConnectorTag:
       type: object
       properties:
@@ -85,21 +100,6 @@ components:
           type: object
         resource_spec_schema:
           type: object
-    DiscoverCreate:
-      type: object
-      required:
-      - connector_tag_id
-      - endpoint_config
-      - capture_name
-      properties:
-        connector_tag_id:
-          type: string
-        endpoint_config:
-          type: object
-        capture_name:
-          type: string
-        draft_id:
-          type: string
     Discover:
       type: object
       properties:
@@ -108,24 +108,13 @@ components:
         connector_tag_id:
           type: string
         draft_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         job_status:
           $ref: '#/components/schemas/JobStatus'
         logs_token:
           type: string
-    JobStatus:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - queued
-          - buildFailed
-          - testFailed
-          - publishFailed
-          - success
-          - emptyDraft
     Connector:
       type: object
       properties:
@@ -140,6 +129,18 @@ components:
           type: object
         recommended:
           type: boolean
+    JobStatus:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - queued
+          - buildFailed
+          - testFailed
+          - publishFailed
+          - success
+          - emptyDraft
   securitySchemes:
     bearerAuth:
       type: http

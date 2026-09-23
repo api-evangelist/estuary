@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Estuary Flow Control Plane Auth API
-  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow.
   termsOfService: https://estuary.dev/terms/
   contact:
     name: Estuary Support
@@ -20,7 +20,7 @@ paths:
       operationId: generateAccessToken
       tags:
       - Auth
-      summary: Exchange a refresh token for a short-lived access token.
+      summary: Exchange a refresh token for a short-lived access token
       description: PostgREST RPC that accepts a refresh_token id and secret and returns a signed access_token used as the Authorization Bearer credential for all other control-plane calls.
       requestBody:
         required: true
@@ -42,7 +42,7 @@ paths:
       operationId: listRefreshTokens
       tags:
       - Auth
-      summary: List refresh tokens for the authenticated user.
+      summary: List refresh tokens for the authenticated user
       responses:
         '200':
           description: An array of refresh tokens.
@@ -56,7 +56,7 @@ paths:
       operationId: createRefreshToken
       tags:
       - Auth
-      summary: Create a new long-lived refresh token.
+      summary: Create a new long-lived refresh token
       requestBody:
         required: true
         content:
@@ -75,7 +75,7 @@ paths:
       operationId: deleteRefreshToken
       tags:
       - Auth
-      summary: Revoke a refresh token.
+      summary: Revoke a refresh token
       parameters:
       - $ref: '#/components/parameters/RowId'
       responses:
@@ -86,7 +86,7 @@ paths:
       operationId: listUserGrants
       tags:
       - Auth
-      summary: List capability grants from users to catalog prefixes.
+      summary: List capability grants from users to catalog prefixes
       responses:
         '200':
           description: An array of user grants.
@@ -101,7 +101,7 @@ paths:
       operationId: listRoleGrants
       tags:
       - Auth
-      summary: List capability grants between catalog prefixes (roles).
+      summary: List capability grants between catalog prefixes (roles)
       responses:
         '200':
           description: An array of role grants.
@@ -113,24 +113,6 @@ paths:
                   $ref: '#/components/schemas/Grant'
 components:
   schemas:
-    RefreshToken:
-      type: object
-      properties:
-        id:
-          type: string
-        detail:
-          type: string
-          nullable: true
-        secret:
-          type: string
-          nullable: true
-          description: Returned only at creation time.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
     GenerateAccessTokenRequest:
       type: object
       required:
@@ -158,6 +140,17 @@ components:
           - read
           - write
           - admin
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Short-lived signed JWT for Authorization Bearer.
+        refresh_token:
+          type:
+          - object
+          - 'null'
+          description: Optionally-rotated refresh token secret.
     RefreshTokenCreate:
       type: object
       properties:
@@ -168,16 +161,26 @@ components:
         valid_for:
           type: string
           description: Postgres interval, e.g. '90 days'.
-    AccessToken:
+    RefreshToken:
       type: object
       properties:
-        access_token:
+        id:
           type: string
-          description: Short-lived signed JWT for Authorization Bearer.
-        refresh_token:
-          type: object
-          nullable: true
-          description: Optionally-rotated refresh token secret.
+        detail:
+          type:
+          - string
+          - 'null'
+        secret:
+          type:
+          - string
+          - 'null'
+          description: Returned only at creation time.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
   parameters:
     RowId:
       name: id

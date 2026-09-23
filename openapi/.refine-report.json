@@ -1,14 +1,7 @@
 {
   "provider": "estuary",
   "sources": [
-    "estuary-auth-api-openapi.yml",
-    "estuary-captures-api-openapi.yml",
-    "estuary-collections-api-openapi.yml",
-    "estuary-connectors-api-openapi.yml",
-    "estuary-drafts-api-openapi.yml",
-    "estuary-materializations-api-openapi.yml",
-    "estuary-publications-api-openapi.yml",
-    "estuary-tenants-api-openapi.yml"
+    "_original/estuary-openapi.yml"
   ],
   "outputs": [
     "estuary-auth-api-openapi.yml",
@@ -23,6 +16,27 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "estuary-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "estuary-openapi.yml: declared missing tag: Auth",
+    "estuary-openapi.yml: declared missing tag: Captures",
+    "estuary-openapi.yml: declared missing tag: Collections",
+    "estuary-openapi.yml: declared missing tag: Connectors",
+    "estuary-openapi.yml: declared missing tag: Drafts",
+    "estuary-openapi.yml: declared missing tag: Materializations",
+    "estuary-openapi.yml: declared missing tag: Publications",
+    "estuary-openapi.yml: declared missing tag: Tenants",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "estuary-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-captures-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-connectors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-drafts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-materializations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-publications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "estuary-tenants-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

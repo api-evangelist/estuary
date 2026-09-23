@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Estuary Flow Control Plane Auth Collections API
-  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow. Clients authenticate with an Authorization Bearer access token, which is obtained by exchanging a long-lived refresh token through the generate_access_token RPC. Most resources are PostgREST tables and RPCs; standard PostgREST query conventions (select, filter operators like eq./gt., order, limit) apply to the table endpoints. Publishing changes to the running data plane is an asynchronous, draft-then-publish workflow. This document is a faithful representative model and is not the vendor's canonical machine-readable contract.
+  title: Estuary Flow Control Plane Collections API
+  description: Representative OpenAPI description of the Estuary Flow control plane, a Supabase deployment (Postgres + PostgREST + GoTrue) that exposes the public-facing REST API for Estuary Flow.
   termsOfService: https://estuary.dev/terms/
   contact:
     name: Estuary Support
@@ -20,7 +20,7 @@ paths:
       operationId: listLiveSpecs
       tags:
       - Collections
-      summary: List live catalog specifications.
+      summary: List live catalog specifications
       description: Returns published, running catalog entities. Filter by catalog_name and spec_type (capture, materialization, collection, test) using PostgREST operators, e.g. spec_type=eq.capture.
       parameters:
       - name: catalog_name
@@ -53,7 +53,7 @@ paths:
       operationId: getLiveSpec
       tags:
       - Collections
-      summary: Get a single live specification.
+      summary: Get a single live specification
       parameters:
       - $ref: '#/components/parameters/RowId'
       responses:
@@ -68,7 +68,7 @@ paths:
       operationId: listLiveSpecFlows
       tags:
       - Collections
-      summary: List data-flow edges between live specs (source to target lineage).
+      summary: List data-flow edges between live specs (source to target lineage)
       responses:
         '200':
           description: An array of live spec flow edges.
@@ -79,20 +79,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/LiveSpecFlow'
 components:
-  parameters:
-    Select:
-      name: select
-      in: query
-      schema:
-        type: string
-      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
     LiveSpecFlow:
       type: object
@@ -126,11 +112,13 @@ components:
           type: object
           description: The full catalog spec document.
         connector_image_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         connector_image_tag:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reads_from:
           type: array
           items:
@@ -144,6 +132,20 @@ components:
         updated_at:
           type: string
           format: date-time
+  parameters:
+    Select:
+      name: select
+      in: query
+      schema:
+        type: string
+      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
   securitySchemes:
     bearerAuth:
       type: http
