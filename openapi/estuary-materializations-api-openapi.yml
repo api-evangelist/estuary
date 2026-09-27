@@ -64,20 +64,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/LiveSpec'
 components:
-  parameters:
-    Select:
-      name: select
-      in: query
-      schema:
-        type: string
-      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
     LiveSpec:
       type: object
@@ -117,6 +103,20 @@ components:
         updated_at:
           type: string
           format: date-time
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
+    Select:
+      name: select
+      in: query
+      schema:
+        type: string
+      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
   securitySchemes:
     bearerAuth:
       type: http

@@ -112,19 +112,15 @@ paths:
                 items:
                   $ref: '#/components/schemas/Grant'
 components:
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
-    GenerateAccessTokenRequest:
-      type: object
-      required:
-      - refresh_token
-      properties:
-        refresh_token:
-          type: object
-          properties:
-            id:
-              type: string
-            secret:
-              type: string
     Grant:
       type: object
       properties:
@@ -140,6 +136,16 @@ components:
           - read
           - write
           - admin
+    RefreshTokenCreate:
+      type: object
+      properties:
+        detail:
+          type: string
+        multi_use:
+          type: boolean
+        valid_for:
+          type: string
+          description: Postgres interval, e.g. '90 days'.
     AccessToken:
       type: object
       properties:
@@ -151,16 +157,6 @@ components:
           - object
           - 'null'
           description: Optionally-rotated refresh token secret.
-    RefreshTokenCreate:
-      type: object
-      properties:
-        detail:
-          type: string
-        multi_use:
-          type: boolean
-        valid_for:
-          type: string
-          description: Postgres interval, e.g. '90 days'.
     RefreshToken:
       type: object
       properties:
@@ -181,14 +177,18 @@ components:
         updated_at:
           type: string
           format: date-time
-  parameters:
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
+    GenerateAccessTokenRequest:
+      type: object
+      required:
+      - refresh_token
+      properties:
+        refresh_token:
+          type: object
+          properties:
+            id:
+              type: string
+            secret:
+              type: string
   securitySchemes:
     bearerAuth:
       type: http

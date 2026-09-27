@@ -80,20 +80,6 @@ paths:
                   $ref: '#/components/schemas/LiveSpecFlow'
 components:
   schemas:
-    LiveSpecFlow:
-      type: object
-      properties:
-        source_id:
-          type: string
-        target_id:
-          type: string
-        flow_type:
-          type: string
-          enum:
-          - capture
-          - materialization
-          - collection
-          - test
     LiveSpec:
       type: object
       properties:
@@ -132,13 +118,21 @@ components:
         updated_at:
           type: string
           format: date-time
+    LiveSpecFlow:
+      type: object
+      properties:
+        source_id:
+          type: string
+        target_id:
+          type: string
+        flow_type:
+          type: string
+          enum:
+          - capture
+          - materialization
+          - collection
+          - test
   parameters:
-    Select:
-      name: select
-      in: query
-      schema:
-        type: string
-      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
     RowId:
       name: id
       in: path
@@ -146,6 +140,12 @@ components:
       schema:
         type: string
       description: PostgREST row id filter, e.g. eq.<flowid>
+    Select:
+      name: select
+      in: query
+      schema:
+        type: string
+      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
   securitySchemes:
     bearerAuth:
       type: http

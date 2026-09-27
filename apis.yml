@@ -46,7 +46,6 @@ tags_raw:
 - Data Integration
 - Streaming ETL
 - Change Data Capture
-- CDC
 - Real-Time Data
 - Data Pipelines
 created: '2026-07-01'

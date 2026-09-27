@@ -100,6 +100,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/DraftSpec'
 components:
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
     DraftSpecUpsert:
       type: object
@@ -120,11 +128,6 @@ components:
           - test
         spec:
           type: object
-    DraftCreate:
-      type: object
-      properties:
-        detail:
-          type: string
     DraftSpec:
       type: object
       properties:
@@ -167,14 +170,11 @@ components:
         updated_at:
           type: string
           format: date-time
-  parameters:
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
+    DraftCreate:
+      type: object
+      properties:
+        detail:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

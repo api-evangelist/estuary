@@ -80,6 +80,39 @@ paths:
                 $ref: '#/components/schemas/BillingReport'
 components:
   schemas:
+    BillingReportRequest:
+      type: object
+      required:
+      - billed_prefix
+      - billed_month
+      properties:
+        billed_prefix:
+          type: string
+        billed_month:
+          type: string
+          format: date
+    CatalogStat:
+      type: object
+      properties:
+        catalog_name:
+          type: string
+        grain:
+          type: string
+          enum:
+          - hourly
+          - daily
+          - monthly
+        ts:
+          type: string
+          format: date-time
+        bytes_written_by_me:
+          type: integer
+        bytes_read_by_me:
+          type: integer
+        docs_written_by_me:
+          type: integer
+        docs_read_by_me:
+          type: integer
     BillingReport:
       type: object
       properties:
@@ -104,17 +137,6 @@ components:
           type: number
         subtotal:
           type: number
-    BillingReportRequest:
-      type: object
-      required:
-      - billed_prefix
-      - billed_month
-      properties:
-        billed_prefix:
-          type: string
-        billed_month:
-          type: string
-          format: date
     Tenant:
       type: object
       properties:
@@ -130,28 +152,6 @@ components:
         created_at:
           type: string
           format: date-time
-    CatalogStat:
-      type: object
-      properties:
-        catalog_name:
-          type: string
-        grain:
-          type: string
-          enum:
-          - hourly
-          - daily
-          - monthly
-        ts:
-          type: string
-          format: date-time
-        bytes_written_by_me:
-          type: integer
-        bytes_read_by_me:
-          type: integer
-        docs_written_by_me:
-          type: integer
-        docs_read_by_me:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http
