@@ -51,18 +51,6 @@ paths:
                 $ref: '#/components/schemas/Publication'
 components:
   schemas:
-    PublicationCreate:
-      type: object
-      required:
-      - draft_id
-      properties:
-        draft_id:
-          type: string
-        dry_run:
-          type: boolean
-          default: false
-        detail:
-          type: string
     JobStatus:
       type: object
       properties:
@@ -91,6 +79,18 @@ components:
         created_at:
           type: string
           format: date-time
+    PublicationCreate:
+      type: object
+      required:
+      - draft_id
+      properties:
+        draft_id:
+          type: string
+        dry_run:
+          type: boolean
+          default: false
+        detail:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

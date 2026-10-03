@@ -109,6 +109,11 @@ components:
         type: string
       description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
+    DraftCreate:
+      type: object
+      properties:
+        detail:
+          type: string
     DraftSpecUpsert:
       type: object
       required:
@@ -170,11 +175,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    DraftCreate:
-      type: object
-      properties:
-        detail:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

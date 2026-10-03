@@ -80,6 +80,45 @@ paths:
                 $ref: '#/components/schemas/BillingReport'
 components:
   schemas:
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant:
+          type: string
+          description: The tenant prefix, e.g. acmeCo/.
+        tasks_quota:
+          type: integer
+        collections_quota:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    BillingReport:
+      type: object
+      properties:
+        billed_prefix:
+          type: string
+        billed_month:
+          type: string
+        line_items:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+              count:
+                type: number
+              rate:
+                type: number
+              subtotal:
+                type: number
+        total_processed_data_gb:
+          type: number
+        subtotal:
+          type: number
     BillingReportRequest:
       type: object
       required:
@@ -113,45 +152,6 @@ components:
           type: integer
         docs_read_by_me:
           type: integer
-    BillingReport:
-      type: object
-      properties:
-        billed_prefix:
-          type: string
-        billed_month:
-          type: string
-        line_items:
-          type: array
-          items:
-            type: object
-            properties:
-              description:
-                type: string
-              count:
-                type: number
-              rate:
-                type: number
-              subtotal:
-                type: number
-        total_processed_data_gb:
-          type: number
-        subtotal:
-          type: number
-    Tenant:
-      type: object
-      properties:
-        id:
-          type: string
-        tenant:
-          type: string
-          description: The tenant prefix, e.g. acmeCo/.
-        tasks_quota:
-          type: integer
-        collections_quota:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

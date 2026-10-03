@@ -112,14 +112,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Grant'
 components:
-  parameters:
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
     Grant:
       type: object
@@ -136,27 +128,6 @@ components:
           - read
           - write
           - admin
-    RefreshTokenCreate:
-      type: object
-      properties:
-        detail:
-          type: string
-        multi_use:
-          type: boolean
-        valid_for:
-          type: string
-          description: Postgres interval, e.g. '90 days'.
-    AccessToken:
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: Short-lived signed JWT for Authorization Bearer.
-        refresh_token:
-          type:
-          - object
-          - 'null'
-          description: Optionally-rotated refresh token secret.
     RefreshToken:
       type: object
       properties:
@@ -177,6 +148,16 @@ components:
         updated_at:
           type: string
           format: date-time
+    RefreshTokenCreate:
+      type: object
+      properties:
+        detail:
+          type: string
+        multi_use:
+          type: boolean
+        valid_for:
+          type: string
+          description: Postgres interval, e.g. '90 days'.
     GenerateAccessTokenRequest:
       type: object
       required:
@@ -189,6 +170,25 @@ components:
               type: string
             secret:
               type: string
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Short-lived signed JWT for Authorization Bearer.
+        refresh_token:
+          type:
+          - object
+          - 'null'
+          description: Optionally-rotated refresh token secret.
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
   securitySchemes:
     bearerAuth:
       type: http
