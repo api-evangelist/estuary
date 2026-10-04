@@ -80,21 +80,6 @@ paths:
                 $ref: '#/components/schemas/BillingReport'
 components:
   schemas:
-    Tenant:
-      type: object
-      properties:
-        id:
-          type: string
-        tenant:
-          type: string
-          description: The tenant prefix, e.g. acmeCo/.
-        tasks_quota:
-          type: integer
-        collections_quota:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
     BillingReport:
       type: object
       properties:
@@ -130,6 +115,21 @@ components:
         billed_month:
           type: string
           format: date
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant:
+          type: string
+          description: The tenant prefix, e.g. acmeCo/.
+        tasks_quota:
+          type: integer
+        collections_quota:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
     CatalogStat:
       type: object
       properties:

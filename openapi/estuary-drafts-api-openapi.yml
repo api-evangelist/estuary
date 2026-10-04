@@ -100,39 +100,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DraftSpec'
 components:
-  parameters:
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
   schemas:
-    DraftCreate:
-      type: object
-      properties:
-        detail:
-          type: string
-    DraftSpecUpsert:
-      type: object
-      required:
-      - draft_id
-      - catalog_name
-      properties:
-        draft_id:
-          type: string
-        catalog_name:
-          type: string
-        spec_type:
-          type: string
-          enum:
-          - capture
-          - materialization
-          - collection
-          - test
-        spec:
-          type: object
     DraftSpec:
       type: object
       properties:
@@ -175,6 +143,38 @@ components:
         updated_at:
           type: string
           format: date-time
+    DraftCreate:
+      type: object
+      properties:
+        detail:
+          type: string
+    DraftSpecUpsert:
+      type: object
+      required:
+      - draft_id
+      - catalog_name
+      properties:
+        draft_id:
+          type: string
+        catalog_name:
+          type: string
+        spec_type:
+          type: string
+          enum:
+          - capture
+          - materialization
+          - collection
+          - test
+        spec:
+          type: object
+  parameters:
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
   securitySchemes:
     bearerAuth:
       type: http

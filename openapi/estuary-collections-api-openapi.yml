@@ -79,20 +79,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/LiveSpecFlow'
 components:
-  parameters:
-    RowId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: PostgREST row id filter, e.g. eq.<flowid>
-    Select:
-      name: select
-      in: query
-      schema:
-        type: string
-      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
   schemas:
     LiveSpecFlow:
       type: object
@@ -146,6 +132,20 @@ components:
         updated_at:
           type: string
           format: date-time
+  parameters:
+    Select:
+      name: select
+      in: query
+      schema:
+        type: string
+      description: PostgREST column/embed selection, e.g. select=id,catalog_name,spec_type
+    RowId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: PostgREST row id filter, e.g. eq.<flowid>
   securitySchemes:
     bearerAuth:
       type: http

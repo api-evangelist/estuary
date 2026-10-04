@@ -51,18 +51,6 @@ paths:
                 $ref: '#/components/schemas/Publication'
 components:
   schemas:
-    JobStatus:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - queued
-          - buildFailed
-          - testFailed
-          - publishFailed
-          - success
-          - emptyDraft
     Publication:
       type: object
       properties:
@@ -79,6 +67,18 @@ components:
         created_at:
           type: string
           format: date-time
+    JobStatus:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - queued
+          - buildFailed
+          - testFailed
+          - publishFailed
+          - success
+          - emptyDraft
     PublicationCreate:
       type: object
       required:

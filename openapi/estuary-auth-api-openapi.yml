@@ -113,21 +113,39 @@ paths:
                   $ref: '#/components/schemas/Grant'
 components:
   schemas:
-    Grant:
+    RefreshTokenCreate:
       type: object
       properties:
-        id:
+        detail:
           type: string
-        subject_role:
+        multi_use:
+          type: boolean
+        valid_for:
           type: string
-        object_role:
+          description: Postgres interval, e.g. '90 days'.
+    AccessToken:
+      type: object
+      properties:
+        access_token:
           type: string
-        capability:
-          type: string
-          enum:
-          - read
-          - write
-          - admin
+          description: Short-lived signed JWT for Authorization Bearer.
+        refresh_token:
+          type:
+          - object
+          - 'null'
+          description: Optionally-rotated refresh token secret.
+    GenerateAccessTokenRequest:
+      type: object
+      required:
+      - refresh_token
+      properties:
+        refresh_token:
+          type: object
+          properties:
+            id:
+              type: string
+            secret:
+              type: string
     RefreshToken:
       type: object
       properties:
@@ -148,39 +166,21 @@ components:
         updated_at:
           type: string
           format: date-time
-    RefreshTokenCreate:
+    Grant:
       type: object
       properties:
-        detail:
+        id:
           type: string
-        multi_use:
-          type: boolean
-        valid_for:
+        subject_role:
           type: string
-          description: Postgres interval, e.g. '90 days'.
-    GenerateAccessTokenRequest:
-      type: object
-      required:
-      - refresh_token
-      properties:
-        refresh_token:
-          type: object
-          properties:
-            id:
-              type: string
-            secret:
-              type: string
-    AccessToken:
-      type: object
-      properties:
-        access_token:
+        object_role:
           type: string
-          description: Short-lived signed JWT for Authorization Bearer.
-        refresh_token:
-          type:
-          - object
-          - 'null'
-          description: Optionally-rotated refresh token secret.
+        capability:
+          type: string
+          enum:
+          - read
+          - write
+          - admin
   parameters:
     RowId:
       name: id
