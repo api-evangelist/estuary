@@ -36,6 +36,9 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/estuary.png
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
 - Data Integration
 - Streaming ETL
@@ -299,6 +302,9 @@ apis:
   - type: Documentation
     url: https://docs.estuary.dev/reference/authentication/
 common:
+- type: CapabilityMap
+  url: capabilities/estuary-capability-edges.yml
+  name: Estuary Business Capability Map
 - type: AgenticAccess
   url: agentic-access/estuary-agentic-access.yml
 - type: DomainSecurity
