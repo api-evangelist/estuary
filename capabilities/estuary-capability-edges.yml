@@ -1,0 +1,26 @@
+slug: estuary
+provider: Estuary
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Tenants
+  spec_file: estuary-tenants-api-openapi.yml
+  capability_id: BC-4250
+  capability_id_l1: BC-4250
+  capability_name: Subscription Billing & Revenue Management
+  confidence: 0.7
+  evidence: POST /rpc/billing_report_202308  billingReport  Compute the monthly billing estimate for a
+    tenant; GET /catalog_stats  listCatalogStats  Read usage statistics (bytes and docs) per catalog entity
+    and grain
+  reason: The operations meter per-tenant usage and compute a monthly billing estimate — usage metering
+    and rating for a consumption-based SaaS. Spans metering and charging, so L1 only.
