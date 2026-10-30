@@ -1,4 +1,4 @@
-# Estuary (estuary)
+# Estuary
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,196 +66,130 @@
 
 Estuary builds Estuary Flow, a real-time data movement platform for streaming ETL and change data capture (CDC). Flow captures data from databases, warehouses, and SaaS systems into durable collections and materializes those collections back out to destinations. The Flow control plane exposes a Supabase/PostgREST-based REST API (Bearer refresh/access tokens) covering captures, materializations, collections, catalog drafts and publications, connectors, and tenants/billing, while the data plane is driven declaratively via the flowctl CLI and a Gitops model.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/estuary/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/estuary/refs/heads/main/apis.yml)
+**Areas:** Data Integration · Streaming ETL · Change Data Capture · Real-Time Data · Data Pipeline
 
-## Tags
+## Estuary on APIs.io
 
-- Data Integration
-- Streaming ETL
-- Change Data Capture
-- CDC
-- Real-Time Data
-- Data Pipelines
+Everything profiled for Estuary is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/estuary/](https://apis.io/providers/estuary/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (8)
 
-- **Created:** 2026-07-01
-- **Modified:** 2026-07-01
+- [Estuary Auth API](https://apis.io/apis/estuary/estuary-auth-api/) — The Auth API from Estuary — 5 operation(s) for auth.
+- [Estuary Captures API](https://apis.io/apis/estuary/estuary-captures-api/) — The Captures API from Estuary — 2 operation(s) for captures.
+- [Estuary Collections API](https://apis.io/apis/estuary/estuary-collections-api/) — The Collections API from Estuary — 3 operation(s) for collections.
+- [Estuary Connectors API](https://apis.io/apis/estuary/estuary-connectors-api/) — The Connectors API from Estuary — 3 operation(s) for connectors.
+- [Estuary Drafts API](https://apis.io/apis/estuary/estuary-drafts-api/) — The Drafts API from Estuary — 3 operation(s) for drafts.
+- [Estuary Materializations API](https://apis.io/apis/estuary/estuary-materializations-api/) — The Materializations API from Estuary — 2 operation(s) for materializations.
+- [Estuary Publications API](https://apis.io/apis/estuary/estuary-publications-api/) — The Publications API from Estuary — 1 operation(s) for publications.
+- [Estuary Tenants API](https://apis.io/apis/estuary/estuary-tenants-api/) — The Tenants API from Estuary — 3 operation(s) for tenants.
 
-## APIs
+### Published properties
 
-### Estuary Captures API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Manage capture task specifications that continuously ingest data from source databases, warehouses, and SaaS systems into Flow collections, modeled as live_specs of catalogType 'capture' and materialized through the draft and publication workflow.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.estuary.dev/concepts/captures/](https://docs.estuary.dev/concepts/captures/)
-- **Base URL:** `https://api.estuary.dev`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Estuary Agentic Access](https://apis.io/agentic-access/estuary/estuary-agentic-access/)
 
-- Captures
-- Ingestion
-- CDC
+#### Collections (9)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.estuary.dev/concepts/captures/)
-- [API Reference](https://docs.estuary.dev/concepts/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Estuary Flow Control Plane API](https://apis.io/collections/estuary/open-estuary/)
+- [Estuary Flow Control Plane Auth API](https://apis.io/collections/estuary/open-estuary-auth-api/)
+- [Estuary Flow Control Plane Auth Captures API](https://apis.io/collections/estuary/open-estuary-captures-api/)
+- [Estuary Flow Control Plane Auth Collections API](https://apis.io/collections/estuary/open-estuary-collections-api/)
+- [Estuary Flow Control Plane Auth Connectors API](https://apis.io/collections/estuary/open-estuary-connectors-api/)
+- [Estuary Flow Control Plane Auth Drafts API](https://apis.io/collections/estuary/open-estuary-drafts-api/)
+- [Estuary Flow Control Plane Auth Materializations API](https://apis.io/collections/estuary/open-estuary-materializations-api/)
+- [Estuary Flow Control Plane Auth Publications API](https://apis.io/collections/estuary/open-estuary-publications-api/)
+- [Estuary Flow Control Plane Auth Tenants API](https://apis.io/collections/estuary/open-estuary-tenants-api/)
 
-### Estuary Materializations API
+#### Security (2)
 
-Manage materialization task specifications that push Flow collections out to destination systems (databases, warehouses, queues), modeled as live_specs of catalogType 'materialization' and published from drafts.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.estuary.dev/concepts/materialization/](https://docs.estuary.dev/concepts/materialization/)
-- **Base URL:** `https://api.estuary.dev`
+- [Estuary Authentication](https://apis.io/security/estuary/estuary-authentication/)
+- [Estuary Domain Security](https://apis.io/security/estuary/estuary-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Materializations
-- Destinations
-- Sync
+Published plans, tiers and prices.
 
-#### Properties
+- [Estuary Plans Pricing](https://apis.io/plans/estuary/estuary-plans-pricing/)
 
-- [Documentation](https://docs.estuary.dev/concepts/materialization/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Estuary Collections API
+Published request limits.
 
-Read and manage collections - durable, schematized, real-time datasets of JSON documents keyed and stored in cloud object storage - exposed as live_specs of catalogType 'collection' with their JSON Schema and key.
+- [Estuary Rate Limits](https://apis.io/rate-limits/estuary/estuary-rate-limits/)
 
-- **Human URL:** [https://docs.estuary.dev/concepts/collections/](https://docs.estuary.dev/concepts/collections/)
-- **Base URL:** `https://api.estuary.dev`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Collections
-- Schemas
-- Storage
+- [Estuary Finops](https://apis.io/finops/estuary/estuary-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.estuary.dev/concepts/collections/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Estuary Catalog Drafts API
-
-Create and edit drafts and their draft_specs - the staging area where proposed changes to captures, materializations, and collections are assembled and tested before being published into the live catalog.
-
-- **Human URL:** [https://docs.estuary.dev/concepts/catalogs/](https://docs.estuary.dev/concepts/catalogs/)
-- **Base URL:** `https://api.estuary.dev`
-
-#### Tags
-
-- Drafts
-- Catalog
-- Specs
-
-#### Properties
-
-- [Documentation](https://docs.estuary.dev/concepts/catalogs/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Estuary Publications API
-
-Submit a draft for publication, validating and promoting its specs into the running data plane as live_specs; asynchronous jobs recorded in the publications table with a job status polled until completion.
-
-- **Human URL:** [https://docs.estuary.dev/concepts/catalogs/](https://docs.estuary.dev/concepts/catalogs/)
-- **Base URL:** `https://api.estuary.dev`
-
-#### Tags
-
-- Publications
-- Publish
-- Catalog
-
-#### Properties
-
-- [Documentation](https://docs.estuary.dev/concepts/catalogs/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Estuary Connectors API
-
-Browse the catalog of available capture and materialization connectors and their tagged image versions (connectors, connector_tags), and run schema discovery against a configured connector via the discovers surface.
-
-- **Human URL:** [https://docs.estuary.dev/concepts/connectors/](https://docs.estuary.dev/concepts/connectors/)
-- **Base URL:** `https://api.estuary.dev`
-
-#### Tags
-
-- Connectors
-- Catalog
-- Discovery
-
-#### Properties
-
-- [Documentation](https://docs.estuary.dev/concepts/connectors/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Estuary Tenants & Billing API
-
-Read tenant configuration, catalog usage statistics (catalog_stats - bytes and docs captured/materialized), and monthly billing estimates via the billing_report_202308 RPC used to meter data-movement GB and connector instances.
-
-- **Human URL:** [https://docs.estuary.dev/getting-started/pricing/](https://docs.estuary.dev/getting-started/pricing/)
-- **Base URL:** `https://api.estuary.dev`
-
-#### Tags
-
-- Tenants
-- Billing
-- Usage
-
-#### Properties
-
-- [Documentation](https://docs.estuary.dev/getting-started/pricing/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Estuary Auth & Tokens API
-
-Manage long-lived refresh_tokens and exchange a refresh token for a short-lived access token via the generate_access_token RPC; inspect roles and capability grants (user_grants, role_grants) that authorize catalog access.
-
-- **Human URL:** [https://docs.estuary.dev/reference/authentication/](https://docs.estuary.dev/reference/authentication/)
-- **Base URL:** `https://api.estuary.dev`
-
-#### Tags
-
-- Authentication
-- Tokens
-- Access Control
-
-#### Properties
-
-- [Documentation](https://docs.estuary.dev/reference/authentication/)
-- [OpenAPI](openapi/estuary-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/estuary.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/estuary.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/estuary)
-- [LinkedIn](https://www.linkedin.com/company/estuary-tech)
 - [Website](https://estuary.dev/)
 - [Documentation](https://docs.estuary.dev)
-- [Plans](plans/estuary-plans-pricing.yml)
-- [Rate Limits](rate-limits/estuary-rate-limits.yml)
-- [Fin Ops](finops/estuary-finops.yml)
+- [Blog](https://estuary.dev/blog/rss.xml)
+- [GitHub](https://github.com/estuary)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 44.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/estuary/](https://apis.io/providers/estuary/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Estuary: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/estuary/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
